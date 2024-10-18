@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35327.3
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PodcastProjektet.DAL", "PodcastProjektet.DAL.csproj", "{4781F533-C1B3-47ED-AE5B-E0E7D3915E21}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PodcastProjektet.DAL", "PodcastProjektet.DAL.csproj", "{4781F533-C1B3-47ED-AE5B-E0E7D3915E21}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PodcastProjektet.BLL", "..\PodcastProjektet.BLL\PodcastProjektet.BLL.csproj", "{B3B7BF9B-99B6-4F61-AE23-971F94A88619}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PodcastProjektet.BLL", "..\PodcastProjektet.BLL\PodcastProjektet.BLL.csproj", "{B3B7BF9B-99B6-4F61-AE23-971F94A88619}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PodcastProjektet.PL", "..\PodcastProjektet.PL\PodcastProjektet.PL.csproj", "{22CD57D7-0D30-4741-805D-B37494B261EF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PodcastProjektet.PL", "..\PodcastProjektet.PL\PodcastProjektet.PL.csproj", "{22CD57D7-0D30-4741-805D-B37494B261EF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
