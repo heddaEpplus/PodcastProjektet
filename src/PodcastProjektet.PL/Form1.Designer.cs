@@ -30,13 +30,16 @@
         {
             button1 = new Button();
             listBox1 = new ListBox();
+            label1 = new Label();
+            label2 = new Label();
             SuspendLayout();
             // 
             // button1
             // 
-            button1.Location = new Point(296, 0);
+            button1.Location = new Point(1274, 380);
+            button1.Margin = new Padding(2, 2, 2, 2);
             button1.Name = "button1";
-            button1.Size = new Size(188, 58);
+            button1.Size = new Size(111, 35);
             button1.TabIndex = 1;
             button1.Text = "button1";
             button1.UseVisualStyleBackColor = true;
@@ -45,28 +48,55 @@
             // listBox1
             // 
             listBox1.FormattingEnabled = true;
-            listBox1.ItemHeight = 41;
-            listBox1.Location = new Point(-10, 0);
+            listBox1.ItemHeight = 25;
+            listBox1.Location = new Point(1197, 380);
+            listBox1.Margin = new Padding(2, 2, 2, 2);
             listBox1.Name = "listBox1";
-            listBox1.Size = new Size(300, 209);
+            listBox1.Size = new Size(63, 54);
             listBox1.TabIndex = 2;
             listBox1.SelectedIndexChanged += listBox1_SelectedIndexChanged;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 18F);
+            label1.Location = new Point(650, 34);
+            label1.Name = "label1";
+            label1.Size = new Size(143, 48);
+            label1.TabIndex = 3;
+            label1.Text = "Podcast";
+            label1.Click += label1_Click;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(71, 120);
+            label2.Name = "label2";
+            label2.Size = new Size(44, 25);
+            label2.TabIndex = 4;
+            label2.Text = "Titel";
+            // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(17F, 41F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(1405, 444);
+            Controls.Add(label2);
+            Controls.Add(label1);
             Controls.Add(listBox1);
             Controls.Add(button1);
+            Margin = new Padding(2, 2, 2, 2);
             Name = "Form1";
             Text = "Form1";
             Load += Form1_Load;
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
         private Button button1;
         private ListBox listBox1;
+        private Label label1;
+        private Label label2;
     }
 }
