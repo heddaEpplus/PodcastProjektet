@@ -14,5 +14,7 @@ namespace PodcastProjektet.DAL.Repository
         void Update(int index, P theObject);
         void Delete(int index);
         void SaveChanges();
+
+        bool AddNewPoddFeed(string rssUrl);
     }
 }

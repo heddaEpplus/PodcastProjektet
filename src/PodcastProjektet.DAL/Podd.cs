@@ -2,16 +2,20 @@
 {
     public class Podd
     {
-        public string Namn;
+        public string Titel;
         public String Id;
+        public string AntalAvsnitt;
+        public String Kategori;
+        public string Namn;
+        public string Url { get; set; }
         public Podd()
-        { Namn = "Ursäkta";
-          Id = "1";
+        { 
+          
         }
 
         public string hamtaPodd()
         {
-            return Namn;
+            return Titel;
         }
 
     }
