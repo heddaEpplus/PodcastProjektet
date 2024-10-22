@@ -96,8 +96,20 @@ namespace PodcastProjektet.DAL.Repository
                                 AntalAvsnitt = feed.Items.Count().ToString(), //hämta antalavsnitt
                                 Kategori = kategori ?? "Ingen kategori",
                                 Namn = feed.Title.Text, // Använd titel från RSS-flödet
+                             
                                 Url = rssUrl // Spara URL till flödet
                             };
+
+                            foreach (var item in feed.Items)
+                            {
+                                var avsnitt = new Avsnitt
+                                {
+                                    Titel = item.Title.Text,
+                                    Beskrivning = item.Summary?.Text ?? "Ingen beskrivning tillgänglig",
+                                   
+                                };
+                                newPodd.AvsnittLista.Add(avsnitt); // Lägg till avsnittet i Podd
+                            }
 
                             // Lägg till det nya podd-objektet till listan och spara ändringarna
                             PoddList.Add(newPodd);

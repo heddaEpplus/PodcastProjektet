@@ -35,13 +35,11 @@
             label1 = new Label();
             label2 = new Label();
             textBox1 = new TextBox();
-            comboBox1 = new ComboBox();
             comboBox2 = new ComboBox();
             label3 = new Label();
             textBox2 = new TextBox();
             comboBox3 = new ComboBox();
             button2 = new Button();
-            button3 = new Button();
             button4 = new Button();
             button6 = new Button();
             button7 = new Button();
@@ -58,6 +56,7 @@
             Kategori = new ColumnHeader();
             columnHeader1 = new ColumnHeader();
             listView2 = new ListView();
+            Avsnitt1 = new ColumnHeader();
             listView3 = new ListView();
             SuspendLayout();
             // 
@@ -97,35 +96,26 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(57, 96);
+            label2.Location = new Point(61, 78);
             label2.Margin = new Padding(2, 0, 2, 0);
             label2.Name = "label2";
-            label2.Size = new Size(52, 20);
+            label2.Size = new Size(93, 20);
             label2.TabIndex = 4;
-            label2.Text = "Namn:";
+            label2.Text = "Ändra namn:";
             // 
             // textBox1
             // 
-            textBox1.Enabled = false;
-            textBox1.Location = new Point(61, 123);
+            textBox1.Location = new Point(61, 100);
             textBox1.Margin = new Padding(2);
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(303, 27);
             textBox1.TabIndex = 5;
-            // 
-            // comboBox1
-            // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(63, 158);
-            comboBox1.Margin = new Padding(2);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(111, 28);
-            comboBox1.TabIndex = 6;
+            textBox1.TextChanged += textBox1_TextChanged;
             // 
             // comboBox2
             // 
             comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new Point(186, 158);
+            comboBox2.Location = new Point(61, 131);
             comboBox2.Margin = new Padding(2);
             comboBox2.Name = "comboBox2";
             comboBox2.Size = new Size(178, 28);
@@ -153,7 +143,7 @@
             // comboBox3
             // 
             comboBox3.FormattingEnabled = true;
-            comboBox3.Location = new Point(433, 76);
+            comboBox3.Location = new Point(433, 99);
             comboBox3.Margin = new Padding(2);
             comboBox3.Name = "comboBox3";
             comboBox3.Size = new Size(178, 28);
@@ -161,23 +151,13 @@
             // 
             // button2
             // 
-            button2.Location = new Point(643, 74);
+            button2.Location = new Point(682, 99);
             button2.Margin = new Padding(2);
             button2.Name = "button2";
             button2.Size = new Size(89, 28);
             button2.TabIndex = 11;
             button2.Text = "Återställ";
             button2.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            button3.Location = new Point(433, 120);
-            button3.Margin = new Padding(2);
-            button3.Name = "button3";
-            button3.Size = new Size(89, 28);
-            button3.TabIndex = 12;
-            button3.Text = "Lägg till";
-            button3.UseVisualStyleBackColor = true;
             // 
             // button4
             // 
@@ -192,17 +172,18 @@
             // 
             // button6
             // 
-            button6.Location = new Point(546, 120);
+            button6.Location = new Point(61, 164);
             button6.Margin = new Padding(2);
             button6.Name = "button6";
             button6.Size = new Size(89, 28);
             button6.TabIndex = 15;
             button6.Text = "Ändra";
             button6.UseVisualStyleBackColor = true;
+            button6.Click += button6_Click;
             // 
             // button7
             // 
-            button7.Location = new Point(643, 120);
+            button7.Location = new Point(169, 164);
             button7.Margin = new Padding(2);
             button7.Name = "button7";
             button7.Size = new Size(89, 28);
@@ -279,11 +260,12 @@
             textBox6.ScrollBars = ScrollBars.Both;
             textBox6.Size = new Size(274, 121);
             textBox6.TabIndex = 25;
+            textBox6.TextChanged += textBox6_TextChanged;
             // 
             // listView1
             // 
             listView1.Columns.AddRange(new ColumnHeader[] { Antalavsnitt, Titel, Kategori, columnHeader1 });
-            listView1.Enabled = false;
+            listView1.FullRowSelect = true;
             listView1.GridLines = true;
             listView1.Location = new Point(63, 214);
             listView1.Margin = new Padding(2);
@@ -316,16 +298,24 @@
             // 
             // listView2
             // 
-            listView2.Enabled = false;
+            listView2.Columns.AddRange(new ColumnHeader[] { Avsnitt1 });
+            listView2.FullRowSelect = true;
             listView2.GridLines = true;
             listView2.Items.AddRange(new ListViewItem[] { listViewItem1 });
             listView2.Location = new Point(815, 230);
             listView2.Margin = new Padding(2);
+            listView2.MultiSelect = false;
             listView2.Name = "listView2";
             listView2.Size = new Size(230, 274);
             listView2.TabIndex = 29;
             listView2.UseCompatibleStateImageBehavior = false;
             listView2.View = View.Details;
+            listView2.SelectedIndexChanged += listView2_SelectedIndexChanged;
+            // 
+            // Avsnitt1
+            // 
+            Avsnitt1.Text = "Avsnitt";
+            Avsnitt1.Width = 250;
             // 
             // listView3
             // 
@@ -358,13 +348,11 @@
             Controls.Add(button7);
             Controls.Add(button6);
             Controls.Add(button4);
-            Controls.Add(button3);
             Controls.Add(button2);
             Controls.Add(comboBox3);
             Controls.Add(textBox2);
             Controls.Add(label3);
             Controls.Add(comboBox2);
-            Controls.Add(comboBox1);
             Controls.Add(textBox1);
             Controls.Add(label2);
             Controls.Add(label1);
@@ -384,13 +372,11 @@
         private Label label1;
         private Label label2;
         private TextBox textBox1;
-        private ComboBox comboBox1;
         private ComboBox comboBox2;
         private Label label3;
         private TextBox textBox2;
         private ComboBox comboBox3;
         private Button button2;
-        private Button button3;
         private Button button4;
         private Button button6;
         private Button button7;
@@ -408,5 +394,6 @@
         private ListView listView2;
         private ListView listView3;
         private ColumnHeader columnHeader1;
+        private ColumnHeader Avsnitt1;
     }
 }
