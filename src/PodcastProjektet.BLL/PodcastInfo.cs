@@ -8,7 +8,7 @@ namespace PodcastProjektet.BLL
 {
     public class PodcastInfo
     {
-        public string Id { get; set; }
+        public string? Id { get; set; }
         public int AntalAvsnitt { get; set; }
         public string? Namn { get; set; }
         public string? Titel { get; set; }

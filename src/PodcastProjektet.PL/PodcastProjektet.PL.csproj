@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="System.ServiceModel.Syndication" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\PodcastProjektet.BLL\PodcastProjektet.BLL.csproj" />
   </ItemGroup>
 
