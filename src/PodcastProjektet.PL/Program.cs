@@ -1,3 +1,5 @@
+using PodcastProjektet.DAL.Repository;
+
 namespace PodcastProjektet.PL
 {
     internal static class Program
@@ -8,10 +10,12 @@ namespace PodcastProjektet.PL
         [STAThread]
         static void Main()
         {
+            PodcastRepository podcastRepository = new PodcastRepository();
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new Form1());
+            Application.Run(new Form1(podcastRepository));
+          
         }
     }
 }

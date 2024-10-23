@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PodcastProjektet.DAL\PodcastProjektet.DAL.csproj" />
+    <ProjectReference Include="..\PodcastProjektet.Models\PodcastProjektet.Models.csproj" />
   </ItemGroup>
 
 </Project>

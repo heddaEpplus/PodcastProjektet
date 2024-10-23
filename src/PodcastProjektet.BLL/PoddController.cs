@@ -1,5 +1,6 @@
 ﻿using PodcastProjektet.DAL;
 using PodcastProjektet.DAL.Repository;
+using PodcastProjektet.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -50,6 +51,16 @@ namespace PodcastProjektet.BLL
         public bool AddNewPoddFromRSS(string rssUrl)
         {
             return ((PodcastRepository)podcastRepository).AddNewPoddFeed(rssUrl);
+        }
+
+        public List<string> GetAllAvsnittBeskrivningarForPodd(string poddId)
+        {
+            Podd podd = podcastRepository.GetByID(poddId);
+            if (podd != null)
+            {
+                return podd.AvsnittLista.Select(a => a.Beskrivning).ToList();
+            }
+            return new List<string>();
         }
 
 

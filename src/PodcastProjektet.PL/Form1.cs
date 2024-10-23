@@ -2,6 +2,7 @@
 using PodcastProjektet.BLL;
 using PodcastProjektet.DAL;
 using PodcastProjektet.DAL.Repository;
+using PodcastProjektet.Models;
 
 namespace PodcastProjektet.PL
 {
@@ -9,12 +10,16 @@ namespace PodcastProjektet.PL
     {
         private PodcastManager _podcastManager;
         private PodcastRepository _podcastRepository;
-        public Form1()
+        ListViewItem selectedItem;
+        private PoddController _controller;
+
+        public Form1(PodcastRepository poddrepo)
         {
             InitializeComponent();
             _podcastManager = new PodcastManager();
-             _podcastRepository = new PodcastRepository();
+            _podcastRepository = poddrepo;
             UpdateListView();
+            PoddController controller = new PoddController();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -71,24 +76,7 @@ namespace PodcastProjektet.PL
                 // Hämta Podd-objektet från Tag
                 var podd = selectedItem.Tag as Podd;
 
-                // Kontrollera att podd inte är null
-                if (podd != null)
-                {
-                    textBox6.Text = podd.Beskrivning;
-
-                    UpdateAvsnittListView(podd.AvsnittLista);
-                    
-
-                    // Om det finns avsnitt, välj det första avsnittet och sätt dess beskrivning i textBox6
-                    if (podd.AvsnittLista.Count > 0)
-                    {
-                        textBox6.Text = podd.AvsnittLista[0].Beskrivning; // Sätt beskrivningen i textBox6
-                    }
-                    else
-                    {
-                        textBox6.Text = "Inga avsnitt tillgängliga."; // Meddelande om inga avsnitt
-                    }
-                }
+              
             }
 
 
@@ -220,7 +208,19 @@ namespace PodcastProjektet.PL
 
         private void listView2_SelectedIndexChanged(object sender, EventArgs e)
         {
+            string poddId = "din-podd-id-här";
 
+            List<string> beskrivningar = _controller.GetAllAvsnittBeskrivningarForPodd(poddId);
+
+            // Töm den befintliga ListView2 för att visa ny data
+            listView2.Items.Clear();
+
+            // Lägg till varje beskrivning som en ny rad i ListView2
+            foreach (var beskrivning in beskrivningar)
+            {
+                ListViewItem item = new ListViewItem(beskrivning);
+                listView2.Items.Add(item);
+            }
         }
     }
 }

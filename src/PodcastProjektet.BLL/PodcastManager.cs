@@ -1,4 +1,5 @@
 ﻿using PodcastProjektet.DAL;
+using PodcastProjektet.Models;
 
 namespace PodcastProjektet.BLL
 {
