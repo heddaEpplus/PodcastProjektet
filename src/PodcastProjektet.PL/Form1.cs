@@ -21,6 +21,7 @@ namespace PodcastProjektet.PL
         private void button1_Click(object sender, EventArgs e)
         {
             listBox1.Items.Add(_podcastManager.getNamn());
+            //test
 
 
         }
