@@ -208,7 +208,7 @@ namespace PodcastProjektet.PL
                     // UpdateListView();
 
                    
-                    // Eventuellt visa ett meddelande till användaren om att uppdateringen sparades
+                    // Eventuellt visa ett meddelande till användaren om att uppdateringen sparades.
                     MessageBox.Show("Poddens namn har uppdaterats och sparats.");
                 }
                
