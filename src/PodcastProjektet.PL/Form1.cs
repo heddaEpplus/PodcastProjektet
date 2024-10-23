@@ -8,10 +8,13 @@ namespace PodcastProjektet.PL
     public partial class Form1 : Form
     {
         private PodcastManager _podcastManager;
+        private PodcastRepository _podcastRepository;
         public Form1()
         {
             InitializeComponent();
             _podcastManager = new PodcastManager();
+             _podcastRepository = new PodcastRepository();
+            UpdateListView();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -100,18 +103,18 @@ namespace PodcastProjektet.PL
 
 
             // Skapa en instans av PodcastRepository
-            var podcastRepo = new PodcastRepository();
+            
 
             // Anropa AddNewPoddFeed-metoden
-            bool success = podcastRepo.AddNewPoddFeed(rssUrl);
+            bool success = _podcastRepository.AddNewPoddFeed(rssUrl);
 
             // Informera användaren om resultatet
             if (success)
             {
                 MessageBox.Show("Podd-flöde tillagt framgångsrikt!");
-                UpdateListView(podcastRepo);
+                UpdateListView();
 
-                var newPodd = podcastRepo.GetAll().Last(); // Hämta den senast tillagda podden
+                var newPodd = _podcastRepository.GetAll().Last(); // Hämta den senast tillagda podden
                 UpdateAvsnittListView(newPodd.AvsnittLista); // Uppdatera listView2 med avsnitt
             }
 
@@ -130,7 +133,7 @@ namespace PodcastProjektet.PL
 
         }
 
-        private void UpdateListView(PodcastRepository podcastRepo)
+        private void UpdateListView()
         {
             // Rensa nuvarande innehåll i ListView
             listView1.Items.Clear();
@@ -138,7 +141,7 @@ namespace PodcastProjektet.PL
             listView2.Items.Clear();
 
             // Hämta alla poddar och fyll i ListView
-            List<Podd> poddar = podcastRepo.GetAll();
+            List<Podd> poddar = _podcastRepository.GetAll();
 
             foreach (var podd in poddar)
             {

@@ -17,7 +17,44 @@ namespace PodcastProjektet.BLL
 
         }
 
-        
+        public List<Podd> GetAllPodcasts()
+        {
+            return podcastRepository.GetAll();
+        }
+
+        // Hämta en podd baserat på ID
+        public Podd GetPoddById(string id)
+        {
+            return podcastRepository.GetByID(id);
+        }
+
+        // Lägg till en ny podd
+        public void AddPodd(Podd newPodd)
+        {
+            podcastRepository.Insert(newPodd);
+        }
+
+        // Uppdatera en befintlig podd
+        public void UpdatePodd(int index, Podd updatedPodd)
+        {
+            podcastRepository.Update(index, updatedPodd);
+        }
+
+        // Ta bort en podd baserat på index
+        public void DeletePodd(int index)
+        {
+            podcastRepository.Delete(index);
+        }
+
+        // Lägg till ett nytt RSS-flöde
+        public bool AddNewPoddFromRSS(string rssUrl)
+        {
+            return ((PodcastRepository)podcastRepository).AddNewPoddFeed(rssUrl);
+        }
+
+
+
+
 
     }
 }
