@@ -3,6 +3,7 @@ using PodcastProjektet.BLL;
 using PodcastProjektet.DAL;
 using PodcastProjektet.DAL.Repository;
 using PodcastProjektet.Models;
+using System;
 
 namespace PodcastProjektet.PL
 {
@@ -201,9 +202,18 @@ namespace PodcastProjektet.PL
                     var podd = (Podd)selectedItem.Tag; // Anta att du har sparat Podd-objektet i Tag
                     podd.Namn = newName; // Uppdatera Podd-objektet
 
-                    // Här kan du också spara ändringen till databasen om det behövs
-                    // podcastRepo.SaveChanges(); // Om SaveChanges-metoden finns och behövs
+                    int index = listView1.Items.IndexOf(selectedItem);
+
+                    //_controller.UpdatePodd( index,podd);
+                    // UpdateListView();
+
+                   
+                    // Eventuellt visa ett meddelande till användaren om att uppdateringen sparades
+                    MessageBox.Show("Poddens namn har uppdaterats och sparats.");
                 }
+               
+
+            
 
             }
             else

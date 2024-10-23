@@ -65,11 +65,12 @@ namespace PodcastProjektet.DAL.Repository
 
        
 
-        public void Update(int index, Podd theNewObject)
+        public void Update(int index, Podd podd)
         {
-           if (index >=0)
+            if (index >= 0)
             {
-                PoddList[index]=theNewObject;
+
+                PoddList[index] = podd;
             }
            SaveChanges();
         }
