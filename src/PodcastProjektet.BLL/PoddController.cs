@@ -11,7 +11,7 @@ namespace PodcastProjektet.BLL
 {
     public class PoddController
     {
-        GenericRepository<Podd> podcastRepository;
+        IPoddRepository<Podd> podcastRepository;
             public PoddController()
         {
             podcastRepository=new PodcastRepository();
@@ -36,9 +36,9 @@ namespace PodcastProjektet.BLL
         }
 
         // Uppdatera en befintlig podd
-        public void UpdatePodd(int index, Podd updatedPodd)
+        public void UpdatePodd( Podd updatedPodd)
         {
-            podcastRepository.Update(index, updatedPodd);
+            podcastRepository.Create(updatedPodd);
         }
 
         // Ta bort en podd baserat på index
@@ -62,6 +62,8 @@ namespace PodcastProjektet.BLL
             }
             return new List<string>();
         }
+
+
 
 
 
