@@ -13,6 +13,7 @@ namespace PodcastProjektet.PL
         private PodcastRepository _podcastRepository;
         ListViewItem selectedItem;
         private PoddController _controller;
+        private KategoriController _kategoriController;
 
         public Form1(PodcastRepository poddrepo)
         {
@@ -20,14 +21,22 @@ namespace PodcastProjektet.PL
             _podcastManager = new PodcastManager();
             _podcastRepository = poddrepo;
             UpdateListView();
-             _controller = new PoddController();
+            _controller = new PoddController();
+            _kategoriController = new KategoriController();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            var kategorier = _kategoriController.HamtaAllaKategorier();
+            listBoxKategorier.Items.Clear(); // Rensa befintliga kategorier
+
+            foreach (var kategori in kategorier)
+            {
+                listBoxKategorier.Items.Add(kategori); // Lägg till varje kategori i listboxen
+            }
 
         }
-       
+
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -43,7 +52,7 @@ namespace PodcastProjektet.PL
 
         }
 
-        
+
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -68,11 +77,11 @@ namespace PodcastProjektet.PL
         private void button4_Click(object sender, EventArgs e)
         {
             string rssUrl = textBox2.Text; // Anta att du har en TextBox för RSS-URL
-            
+
 
 
             // Skapa en instans av PodcastRepository
-            
+
 
             // Anropa AddNewPoddFeed-metoden
             bool success = _podcastRepository.AddNewPoddFeed(rssUrl);
@@ -112,7 +121,7 @@ namespace PodcastProjektet.PL
             // Hämta alla poddar och fyll i ListView
             List<Podd> poddar = _podcastRepository.GetAll();
 
-            
+
 
             foreach (var podd in poddar)
             {
@@ -127,11 +136,11 @@ namespace PodcastProjektet.PL
 
                 listViewItem.Tag = podd;
 
-                
+
 
                 listView1.Items.Add(listViewItem);
 
-                
+
             }
             if (poddar.Count > 0)
             {
@@ -146,8 +155,8 @@ namespace PodcastProjektet.PL
                 listView2.Items.Clear(); // Rensa avsnittlistan
                 listView2.Items.Add(new ListViewItem("Inga avsnitt tillgängliga för "));
             }
-        
-         }
+
+        }
 
 
 
@@ -166,7 +175,7 @@ namespace PodcastProjektet.PL
                     ListViewItem avsnittItem = new ListViewItem(avsnitt.Titel); // Visa avsnittets titel
                     avsnittItem.SubItems.Add(avsnitt.Beskrivning); // Lägg till avsnittets beskrivning
                     listView2.Items.Add(avsnittItem); // Lägg till avsnittet i listView2
-                    
+
                 }
             }
             else
@@ -207,13 +216,13 @@ namespace PodcastProjektet.PL
                     //_controller.UpdatePodd( index,podd);
                     // UpdateListView();
 
-                   
+
                     // Eventuellt visa ett meddelande till användaren om att uppdateringen sparades.
                     MessageBox.Show("Poddens namn har uppdaterats och sparats.");
                 }
-               
 
-            
+
+
 
             }
             else
@@ -234,15 +243,15 @@ namespace PodcastProjektet.PL
             List<string> beskrivningar = _controller.GetAllAvsnittBeskrivningarForPodd(poddId);
 
             // Töm den befintliga ListView2 för att visa ny data
-            
+
 
             // Lägg till varje beskrivning som en ny rad i ListView2
             foreach (var beskrivning in beskrivningar)
             {
                 ListViewItem item = new ListViewItem(beskrivning);
                 listView2.Items.Add(item);
-               
-                
+
+
             }
 
 
@@ -258,6 +267,51 @@ namespace PodcastProjektet.PL
                 textBox6.Text = avsnittsBeskrivning;
             }
 
+        }
+
+        private void listView3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            string nyKategori = textBoxNyKategori.Text; // Anta att du har en TextBox för att ange nya kategorinamn
+
+            try
+            {
+                _kategoriController.LaggTillKategori(nyKategori);
+                MessageBox.Show("Kategorin har lagts till!");
+                Form1_Load(sender, e); // Uppdatera listan med kategorier
+            }
+            catch (ArgumentException ex)
+            {
+                MessageBox.Show(ex.Message); // Visa felmeddelande om kategorin redan finns
+            }
+
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            if (listBoxKategorier.SelectedItems != null)
+            {
+                string kategoriAttTaBort = listBoxKategorier.SelectedItems.ToString();
+
+                try
+                {
+                    _kategoriController.TaBort(kategoriAttTaBort);
+                    MessageBox.Show("Kategorin har tagits bort!");
+                    Form1_Load(sender, e); // Uppdatera listan med kategorier
+                }
+                catch (ArgumentException ex)
+                {
+                    MessageBox.Show(ex.Message); // Visa felmeddelande om kategorin inte finns
+                }
+            }
+            else
+            {
+                MessageBox.Show("Vänligen välj en kategori att ta bort.");
+            }
         }
     }
 }
