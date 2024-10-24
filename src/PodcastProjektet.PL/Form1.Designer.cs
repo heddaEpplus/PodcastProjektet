@@ -30,8 +30,6 @@
         {
             ListViewItem listViewItem1 = new ListViewItem("");
             ListViewItem listViewItem2 = new ListViewItem("");
-            button1 = new Button();
-            listBox1 = new ListBox();
             label1 = new Label();
             label2 = new Label();
             textBox1 = new TextBox();
@@ -59,27 +57,6 @@
             Avsnitt1 = new ColumnHeader();
             listView3 = new ListView();
             SuspendLayout();
-            // 
-            // button1
-            // 
-            button1.Location = new Point(1225, 27);
-            button1.Margin = new Padding(2);
-            button1.Name = "button1";
-            button1.Size = new Size(89, 28);
-            button1.TabIndex = 1;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
-            // 
-            // listBox1
-            // 
-            listBox1.FormattingEnabled = true;
-            listBox1.Location = new Point(1149, 12);
-            listBox1.Margin = new Padding(2);
-            listBox1.Name = "listBox1";
-            listBox1.Size = new Size(51, 44);
-            listBox1.TabIndex = 2;
-            listBox1.SelectedIndexChanged += listBox1_SelectedIndexChanged;
             // 
             // label1
             // 
@@ -356,8 +333,6 @@
             Controls.Add(textBox1);
             Controls.Add(label2);
             Controls.Add(label1);
-            Controls.Add(listBox1);
-            Controls.Add(button1);
             Margin = new Padding(2);
             Name = "Form1";
             Text = "Form1";
@@ -367,8 +342,6 @@
         }
 
         #endregion
-        private Button button1;
-        private ListBox listBox1;
         private Label label1;
         private Label label2;
         private TextBox textBox1;

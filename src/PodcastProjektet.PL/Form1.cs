@@ -3,6 +3,7 @@ using PodcastProjektet.BLL;
 using PodcastProjektet.DAL;
 using PodcastProjektet.DAL.Repository;
 using PodcastProjektet.Models;
+using System;
 
 namespace PodcastProjektet.PL
 {
@@ -19,21 +20,14 @@ namespace PodcastProjektet.PL
             _podcastManager = new PodcastManager();
             _podcastRepository = poddrepo;
             UpdateListView();
-            PoddController controller = new PoddController();
+             _controller = new PoddController();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
 
         }
-        private void button1_Click(object sender, EventArgs e)
-        {
-            listBox1.Items.Add(_podcastManager.getNamn());
-            //test
-
-
-        }
-
+       
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -49,22 +43,7 @@ namespace PodcastProjektet.PL
 
         }
 
-        private void UpdateAvsnittListView(List<Avsnitt> avsnittLista)
-        {
-            {
-                listView2.Items.Clear(); // Rensa nuvarande avsnitt
-
-                foreach (var avsnitt in avsnittLista)
-                {
-                    var listViewItem = new ListViewItem(avsnitt.Titel); // Använd avsnittets titel
-                    listViewItem.SubItems.Add(avsnitt.Beskrivning); // Beskrivning
-
-
-                    listView2.Items.Add(listViewItem);
-                }
-            }
-
-        }
+        
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -76,7 +55,9 @@ namespace PodcastProjektet.PL
                 // Hämta Podd-objektet från Tag
                 var podd = selectedItem.Tag as Podd;
 
-              
+                UpdateAvsnittListView(podd);
+
+
             }
 
 
@@ -103,7 +84,7 @@ namespace PodcastProjektet.PL
                 UpdateListView();
 
                 var newPodd = _podcastRepository.GetAll().Last(); // Hämta den senast tillagda podden
-                UpdateAvsnittListView(newPodd.AvsnittLista); // Uppdatera listView2 med avsnitt
+                UpdateAvsnittListView(newPodd); // Uppdatera avsnitt i listView2
             }
 
 
@@ -131,6 +112,8 @@ namespace PodcastProjektet.PL
             // Hämta alla poddar och fyll i ListView
             List<Podd> poddar = _podcastRepository.GetAll();
 
+            
+
             foreach (var podd in poddar)
             {
                 // Skapa en ny ListViewItem med poddnamnet
@@ -144,6 +127,8 @@ namespace PodcastProjektet.PL
 
                 listViewItem.Tag = podd;
 
+                
+
                 listView1.Items.Add(listViewItem);
 
                 
@@ -151,7 +136,7 @@ namespace PodcastProjektet.PL
             if (poddar.Count > 0)
             {
                 var firstPodd = poddar[0]; // Hämta den första podden
-                UpdateAvsnittListView(firstPodd.AvsnittLista); // Uppdatera avsnitt i listView2
+                UpdateAvsnittListView(firstPodd); // Uppdatera avsnitt i listView2
             }
 
             else
@@ -162,7 +147,34 @@ namespace PodcastProjektet.PL
                 listView2.Items.Add(new ListViewItem("Inga avsnitt tillgängliga för "));
             }
         
-    }
+         }
+
+
+
+        private void UpdateAvsnittListView(Podd selectedPodd)
+        {
+            listView2.Items.Clear(); // Rensa tidigare avsnitt
+
+            // Hämta avsnitt för den valda podden
+            var avsnittLista = selectedPodd.AvsnittLista; // Hämta avsnitt från den valda podden
+
+            if (avsnittLista.Count > 0)
+            {
+                foreach (var avsnitt in avsnittLista)
+                {
+                    // Skapa en ListViewItem för varje avsnitt
+                    ListViewItem avsnittItem = new ListViewItem(avsnitt.Titel); // Visa avsnittets titel
+                    avsnittItem.SubItems.Add(avsnitt.Beskrivning); // Lägg till avsnittets beskrivning
+                    listView2.Items.Add(avsnittItem); // Lägg till avsnittet i listView2
+                    
+                }
+            }
+            else
+            {
+                listView2.Items.Add(new ListViewItem("Inga avsnitt tillgängliga för " + selectedPodd.Titel));
+            }
+        }
+
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
@@ -190,9 +202,18 @@ namespace PodcastProjektet.PL
                     var podd = (Podd)selectedItem.Tag; // Anta att du har sparat Podd-objektet i Tag
                     podd.Namn = newName; // Uppdatera Podd-objektet
 
-                    // Här kan du också spara ändringen till databasen om det behövs
-                    // podcastRepo.SaveChanges(); // Om SaveChanges-metoden finns och behövs
+                    int index = listView1.Items.IndexOf(selectedItem);
+
+                    //_controller.UpdatePodd( index,podd);
+                    // UpdateListView();
+
+                   
+                    // Eventuellt visa ett meddelande till användaren om att uppdateringen sparades.
+                    MessageBox.Show("Poddens namn har uppdaterats och sparats.");
                 }
+               
+
+            
 
             }
             else
@@ -213,14 +234,30 @@ namespace PodcastProjektet.PL
             List<string> beskrivningar = _controller.GetAllAvsnittBeskrivningarForPodd(poddId);
 
             // Töm den befintliga ListView2 för att visa ny data
-            listView2.Items.Clear();
+            
 
             // Lägg till varje beskrivning som en ny rad i ListView2
             foreach (var beskrivning in beskrivningar)
             {
                 ListViewItem item = new ListViewItem(beskrivning);
                 listView2.Items.Add(item);
+               
+                
             }
+
+
+            if (listView2.SelectedItems.Count > 0)
+            {
+                // Hämta det valda objektet
+                ListViewItem selectedItem = listView2.SelectedItems[0];
+
+                // Hämta avsnittsbeskrivningen från det valda objektet
+                string avsnittsBeskrivning = selectedItem.SubItems[1].Text; // Anta att beskrivningen ligger i det första subitem
+
+                // Sätt avsnittsbeskrivningen i textBox6
+                textBox6.Text = avsnittsBeskrivning;
+            }
+
         }
     }
 }

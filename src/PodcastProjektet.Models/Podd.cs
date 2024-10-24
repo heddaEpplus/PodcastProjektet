@@ -13,7 +13,7 @@ namespace PodcastProjektet.Models
         public string AntalAvsnitt;
         public String Kategori;
         public string Namn;
-        
+
         public List<Avsnitt> AvsnittLista { get; set; } // Ny lista för avsnitt
 
         public string Url { get; set; }
