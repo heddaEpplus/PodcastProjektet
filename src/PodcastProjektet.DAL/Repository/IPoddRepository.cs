@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace PodcastProjektet.DAL.Repository
 {
-    public interface GenericRepository<P>
+    public interface IPoddRepository<P> where P : class
     {
         List<P> GetAll();
         P GetByID(string id);
         void Insert(P theObject);
-        void Update(int index, P podd);
+        void Create(P item);
         void Delete(int index);
         void SaveChanges();
 

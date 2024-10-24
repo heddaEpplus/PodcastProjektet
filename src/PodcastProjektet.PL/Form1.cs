@@ -10,17 +10,18 @@ namespace PodcastProjektet.PL
     public partial class Form1 : Form
     {
         private PodcastManager _podcastManager;
-        private PodcastRepository _podcastRepository;
+        
         ListViewItem selectedItem;
         private PoddController _controller;
 
-        public Form1(PodcastRepository poddrepo)
+        public Form1()
         {
             InitializeComponent();
             _podcastManager = new PodcastManager();
-            _podcastRepository = poddrepo;
-            UpdateListView();
+            
+           
              _controller = new PoddController();
+            UpdateListView();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -75,7 +76,8 @@ namespace PodcastProjektet.PL
             
 
             // Anropa AddNewPoddFeed-metoden
-            bool success = _podcastRepository.AddNewPoddFeed(rssUrl);
+            
+            bool success = _controller.AddNewPoddFromRSS(rssUrl);
 
             // Informera användaren om resultatet
             if (success)
@@ -83,7 +85,7 @@ namespace PodcastProjektet.PL
                 MessageBox.Show("Podd-flöde tillagt framgångsrikt!");
                 UpdateListView();
 
-                var newPodd = _podcastRepository.GetAll().Last(); // Hämta den senast tillagda podden
+                var newPodd = _controller.GetAllPodcasts().Last(); // Hämta den senast tillagda podden
                 UpdateAvsnittListView(newPodd); // Uppdatera avsnitt i listView2
             }
 
@@ -110,7 +112,7 @@ namespace PodcastProjektet.PL
             listView2.Items.Clear();
 
             // Hämta alla poddar och fyll i ListView
-            List<Podd> poddar = _podcastRepository.GetAll();
+            List<Podd> poddar = _controller.GetAllPodcasts();
 
             
 
@@ -202,10 +204,10 @@ namespace PodcastProjektet.PL
                     var podd = (Podd)selectedItem.Tag; // Anta att du har sparat Podd-objektet i Tag
                     podd.Namn = newName; // Uppdatera Podd-objektet
 
-                    int index = listView1.Items.IndexOf(selectedItem);
+                    
 
-                    //_controller.UpdatePodd( index,podd);
-                    // UpdateListView();
+                    _controller.UpdatePodd( podd);
+                     UpdateListView();
 
                    
                     // Eventuellt visa ett meddelande till användaren om att uppdateringen sparades.

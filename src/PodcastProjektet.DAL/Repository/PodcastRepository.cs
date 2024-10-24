@@ -11,7 +11,7 @@ using System.Xml.Linq;
 
 namespace PodcastProjektet.DAL.Repository
 {
-    public class PodcastRepository : GenericRepository<Podd>
+    public class PodcastRepository : IPoddRepository<Podd>
     {
         //private readonly string _rssUrl;
         Serializer<Podd> PoddSerializer;
@@ -27,7 +27,15 @@ namespace PodcastProjektet.DAL.Repository
 
         public List<Podd> GetAll()
         {
-            return PoddSerializer.Deserialize();
+           List<Podd> poddlistDeserialized = new List<Podd>();
+                try {
+                poddlistDeserialized = PoddSerializer.Deserialize();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("", ex);
+            }
+            return poddlistDeserialized;
           
         }
 
@@ -54,6 +62,7 @@ namespace PodcastProjektet.DAL.Repository
 
         public void Insert( Podd theObject)
         {
+            PoddList = PoddSerializer.Deserialize();
             PoddList.Add(theObject);
             SaveChanges();
         }
@@ -65,14 +74,11 @@ namespace PodcastProjektet.DAL.Repository
 
        
 
-        public void Update(int index, Podd podd)
+        public void Create(Podd enPodd)
         {
-            if (index >= 0)
-            {
-
-                PoddList[index] = podd;
-            }
-           SaveChanges();
+            PoddList = GetAll();
+            PoddList.Add(enPodd);
+            SaveChanges();
         }
 
         public bool AddNewPoddFeed(string rssUrl)
@@ -113,6 +119,7 @@ namespace PodcastProjektet.DAL.Repository
                                 newPodd.AvsnittLista.Add(avsnitt); // Lägg till avsnittet i Podd
                             }
 
+                            PoddList = PoddSerializer.Deserialize();
                             // Lägg till det nya podd-objektet till listan och spara ändringarna
                             PoddList.Add(newPodd);
                             SaveChanges();
