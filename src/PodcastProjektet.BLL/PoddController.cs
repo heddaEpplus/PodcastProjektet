@@ -36,12 +36,12 @@ namespace PodcastProjektet.BLL
         }
 
         // Uppdatera en befintlig podd
-        public void UpdatePodd( Podd updatedPodd)
+        public void UpdatePodd(string titel, string nyttNamn)
         {
-            podcastRepository.Create(updatedPodd);
+            podcastRepository.Update(titel, nyttNamn);
         }
 
-        // Ta bort en podd baserat på index
+        // Ta bort en podd baserat på titel
         public void DeletePodd(string titel)
         {
             podcastRepository.Delete(titel);

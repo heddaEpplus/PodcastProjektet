@@ -42,10 +42,9 @@ namespace PodcastProjektet.DAL.Repository
 
         public void Delete(string titel)
         {
-            //RssReader.Delete(podTitle);
 
             var doc = XDocument.Load("PoddList.xml");
-            var node = doc.Descendants("Podd").Where(podd => (string)podd.Element("Title") == titel).ToList();
+            var node = doc.Descendants("Podd").Where(podd => (string)podd.Element("Titel") == titel).ToList();
 
             foreach (var podd in node)
             {
@@ -54,8 +53,7 @@ namespace PodcastProjektet.DAL.Repository
 
             doc.Save("PoddList.xml");
 
-            //PoddList.RemoveAt(index);
-            //SaveChanges();  
+            
         }
 
         public Podd GetByID(string id)
@@ -87,11 +85,30 @@ namespace PodcastProjektet.DAL.Repository
 
        
 
-        public void Create(Podd enPodd)
+        public void Update(string titel, string nyttNamn)
         {
-            PoddList = GetAll();
-            PoddList.Add(enPodd);
-            SaveChanges();
+            var doc = XDocument.Load("PoddList.xml");
+            var node = doc.Descendants("Podd").FirstOrDefault(podd => (string)podd.Element("Titel") == titel);
+
+            if (node != null)
+            {
+                // Uppdatera namnet på podden
+                var namnElement = node.Element("Namn");
+                if (namnElement != null)
+                {
+                    namnElement.Value = nyttNamn; // Sätt det nya namnet
+                    doc.Save("PoddList.xml"); // Spara ändringarna till filen
+                }
+                else
+                {
+                    Console.WriteLine("Elementet 'Namn' hittades inte för den angivna podden.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Ingen podd hittades med titeln: " + titel);
+            }
+
         }
 
         public bool AddNewPoddFeed(string rssUrl)

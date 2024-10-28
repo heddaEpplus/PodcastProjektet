@@ -15,8 +15,8 @@ namespace PodcastProjektet.DAL
 
             public Serializer(string fileName)
             {
-                FileName = fileName;
-            }
+            FileName = fileName.EndsWith(".xml") ? fileName : fileName + ".xml";
+        }
 
             public void Serialize(List<P> list)
             {

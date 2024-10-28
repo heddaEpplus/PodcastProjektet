@@ -11,7 +11,7 @@ namespace PodcastProjektet.DAL.Repository
         List<P> GetAll();
         P GetByID(string id);
         void Insert(P theObject);
-        void Create(P item);
+        void Update(string titel, string nyttNamn);
         void Delete(string titel);
         void SaveChanges();
 
