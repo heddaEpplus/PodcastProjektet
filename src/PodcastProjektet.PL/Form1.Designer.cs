@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            ListViewItem listViewItem3 = new ListViewItem("");
-            ListViewItem listViewItem4 = new ListViewItem("");
+            ListViewItem listViewItem1 = new ListViewItem("");
+            ListViewItem listViewItem2 = new ListViewItem("");
             label1 = new Label();
             label2 = new Label();
             textBox1 = new TextBox();
@@ -56,6 +56,7 @@
             listView2 = new ListView();
             Avsnitt1 = new ColumnHeader();
             KategoriListView = new ListView();
+            columnHeader2 = new ColumnHeader();
             SuspendLayout();
             // 
             // label1
@@ -281,7 +282,7 @@
             listView2.Columns.AddRange(new ColumnHeader[] { Avsnitt1 });
             listView2.FullRowSelect = true;
             listView2.GridLines = true;
-            listView2.Items.AddRange(new ListViewItem[] { listViewItem3 });
+            listView2.Items.AddRange(new ListViewItem[] { listViewItem1 });
             listView2.Location = new Point(1732, 472);
             listView2.Margin = new Padding(4);
             listView2.MultiSelect = false;
@@ -299,9 +300,10 @@
             // 
             // KategoriListView
             // 
+            KategoriListView.Columns.AddRange(new ColumnHeader[] { columnHeader2 });
             KategoriListView.Enabled = false;
             KategoriListView.GridLines = true;
-            KategoriListView.Items.AddRange(new ListViewItem[] { listViewItem4 });
+            KategoriListView.Items.AddRange(new ListViewItem[] { listViewItem2 });
             KategoriListView.Location = new Point(2304, 472);
             KategoriListView.Margin = new Padding(4);
             KategoriListView.Name = "KategoriListView";
@@ -309,6 +311,12 @@
             KategoriListView.TabIndex = 30;
             KategoriListView.UseCompatibleStateImageBehavior = false;
             KategoriListView.View = View.Details;
+            KategoriListView.SelectedIndexChanged += KategoriListView_SelectedIndexChanged;
+            // 
+            // columnHeader2
+            // 
+            columnHeader2.Text = "Kategorier";
+            columnHeader2.Width = 400;
             // 
             // Form1
             // 
@@ -371,5 +379,6 @@
         private ListView KategoriListView;
         private ColumnHeader columnHeader1;
         private ColumnHeader Avsnitt1;
+        private ColumnHeader columnHeader2;
     }
 }
