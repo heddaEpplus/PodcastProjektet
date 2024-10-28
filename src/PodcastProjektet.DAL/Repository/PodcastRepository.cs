@@ -1,6 +1,7 @@
 ﻿using PodcastProjektet.Models;
 using System;
 using System.Collections.Generic;
+using System.Formats.Asn1;
 using System.Linq;
 using System.Runtime.Serialization.Json;
 using System.ServiceModel.Syndication;
@@ -39,10 +40,22 @@ namespace PodcastProjektet.DAL.Repository
           
         }
 
-        public void Delete(int index)
+        public void Delete(string titel)
         {
-            PoddList.RemoveAt(index);
-            SaveChanges();  
+            //RssReader.Delete(podTitle);
+
+            var doc = XDocument.Load("PoddList.xml");
+            var node = doc.Descendants("Podd").Where(podd => (string)podd.Element("Title") == titel).ToList();
+
+            foreach (var podd in node)
+            {
+                podd.Remove();
+            }
+
+            doc.Save("PoddList.xml");
+
+            //PoddList.RemoveAt(index);
+            //SaveChanges();  
         }
 
         public Podd GetByID(string id)

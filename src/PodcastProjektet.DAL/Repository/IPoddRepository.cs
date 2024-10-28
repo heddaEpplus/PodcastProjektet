@@ -12,7 +12,7 @@ namespace PodcastProjektet.DAL.Repository
         P GetByID(string id);
         void Insert(P theObject);
         void Create(P item);
-        void Delete(int index);
+        void Delete(string titel);
         void SaveChanges();
 
         bool AddNewPoddFeed(string rssUrl);
