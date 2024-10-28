@@ -29,13 +29,28 @@ namespace PodcastProjektet.DAL
 
             public List<P> Deserialize() 
             {
-                List<P> list;
-                XmlSerializer enXmlSerializer = new XmlSerializer(typeof(List<P>));
-                FileStream minFileStream= new FileStream(FileName,FileMode.Open, FileAccess.Read);
-                list = (List<P>)enXmlSerializer.Deserialize(minFileStream);
-                minFileStream.Close ();
-                return list;
+            if (!File.Exists(FileName))
+            {
+                // Returnera en tom lista om filen saknas
+                return new List<P>();
             }
+
+            List<P> list;
+            XmlSerializer enXmlSerializer = new XmlSerializer(typeof(List<P>));
+
+            using (FileStream minFileStream = new FileStream(FileName, FileMode.Open, FileAccess.Read))
+            {
+                list = (List<P>)enXmlSerializer.Deserialize(minFileStream);
+            }
+
+            return list;
+            //List<P> list;
+            //XmlSerializer enXmlSerializer = new XmlSerializer(typeof(List<P>));
+            //FileStream minFileStream= new FileStream(FileName,FileMode.Open, FileAccess.Read);
+            //list = (List<P>)enXmlSerializer.Deserialize(minFileStream);
+            //minFileStream.Close ();
+            //return list;
+        }
         
         }
 }
