@@ -42,9 +42,9 @@ namespace PodcastProjektet.BLL
         }
 
         // Ta bort en podd baserat på index
-        public void DeletePodd(int index)
+        public void DeletePodd(string titel)
         {
-            podcastRepository.Delete(index);
+            podcastRepository.Delete(titel);
         }
 
         // Lägg till ett nytt RSS-flöde
