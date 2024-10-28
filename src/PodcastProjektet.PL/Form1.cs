@@ -28,7 +28,13 @@ namespace PodcastProjektet.PL
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            List<string> kategorier = _kategoriController.HamtaAllaKategorier();
 
+            foreach (var kategori in kategorier)
+            {
+                ListViewItem item = new ListViewItem(kategori);
+                KategoriListView.Items.Add(item);
+            }
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -354,6 +360,19 @@ namespace PodcastProjektet.PL
             else
             {
                 MessageBox.Show("Ange ett giltigt kategorinamn för att ta bort.");
+            }
+        }
+
+        private void KategoriListView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            List<string> kategorier = _kategoriController.HamtaAllaKategorier();
+
+            foreach (var kategori in kategorier)
+            {
+                ListViewItem item = new ListViewItem(kategori);
+                KategoriListView.Items.Add(item);
+
+
             }
         }
     }
