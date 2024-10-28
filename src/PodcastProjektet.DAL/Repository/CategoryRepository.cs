@@ -11,11 +11,13 @@ namespace PodcastProjektet.DAL.Repository
     {
         List<Kategori> kategoriLista;
         Serializer<Kategori> serializer;
+        List<Podd> poddList;
 
         public CategoryRepository()
         {
             kategoriLista = new List<Kategori>();
             serializer = new Serializer<Kategori>(nameof(kategoriLista));
+            poddList = new List<Podd>();
             SkappaDefaultKategori();
         }
         public List<string> HamtaAllaKategorier()
