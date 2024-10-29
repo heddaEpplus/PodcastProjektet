@@ -116,6 +116,7 @@ namespace PodcastProjektet.DAL.Repository
                                 Titel = feed.Title.Text, // Använd titel från RSS-flödet
                                 AntalAvsnitt = feed.Items.Count().ToString(), //hämta antalavsnitt
                                 Kategori = kategori ?? "Ingen kategori",
+                                //Kategori = _categoryRepository.HamtaKategori(kategori).KategoriNamn,
                                 Namn = feed.Title.Text, // Använd titel från RSS-flödet
                              
                                 Url = rssUrl // Spara URL till flödet

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using PodcastProjektet.DAL;
 using PodcastProjektet.DAL.Repository;
+using PodcastProjektet.Models;
 
 namespace PodcastProjektet.BLL
 {
@@ -17,11 +18,9 @@ namespace PodcastProjektet.BLL
             _categoryRepository = new CategoryRepository();
         }
 
-        public List<string> HamtaAllaKategorier()
+        public List<Kategori> HamtaAllaKategorier()
         {
-            List<string> allaKategorier = new List<string>();
-            allaKategorier = _categoryRepository.HamtaAllaKategorier();
-            return allaKategorier;
+            return _categoryRepository.HamtaAllaKategorier();
         }
 
         public void LaggTillKategori(string nyKategori)

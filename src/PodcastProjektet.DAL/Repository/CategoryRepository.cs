@@ -11,18 +11,46 @@ namespace PodcastProjektet.DAL.Repository
     {
         List<Kategori> kategoriLista;
         Serializer<Kategori> serializer;
-        List<Podd> poddList;
+        List<Podd> poddLista;
+        PodcastRepository _podcastRepository;
 
         public CategoryRepository()
         {
             kategoriLista = new List<Kategori>();
             serializer = new Serializer<Kategori>(nameof(kategoriLista));
-            poddList = new List<Podd>();
+            _podcastRepository = new PodcastRepository();
+            poddLista = _podcastRepository.GetAll();
             SkappaDefaultKategori();
         }
-        public List<string> HamtaAllaKategorier()
+        public List<Kategori> HamtaAllaKategorier()
         {
-           return kategoriLista.Select(k=> k.KategoriNamn).ToList();
+            if(poddLista != null && poddLista.Count > 0)
+            {
+                HamtaKategoriFranPodd();
+            }
+            return kategoriLista;
+        }
+        public void HamtaKategoriFranPodd()
+        {
+            //if (poddLista.Count > 0)
+            //{
+            //    foreach (var podd in poddLista)
+            //    {
+            //        string poddensKategoriNamn = podd.Kategori;
+            //        if (kategoriOversattning.ContainsKey(poddensKategoriNamn))
+            //        {
+            //            poddensKategoriNamn = kategoriOversattning[poddensKategoriNamn];
+            //        }
+            //        var matchadKategori = kategoriLista.FirstOrDefault(k => k.KategoriNamn == poddensKategoriNamn);
+            //        if (matchadKategori == null)
+            //        {
+            //            matchadKategori = new Kategori(poddensKategoriNamn);
+            //            kategoriLista.Add(matchadKategori);
+            //            serializer.Serialize(kategoriLista);
+            //        }
+            //        podd.Kategori = poddensKategoriNamn;
+            //    }
+            //}
         }
 
         public void LaggTillKategori(string nyKategori)
