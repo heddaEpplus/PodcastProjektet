@@ -12,6 +12,7 @@ namespace PodcastProjektet.DAL.Repository
         P GetByID(string id);
         void Insert(P theObject);
         void Update(string titel, string nyttNamn);
+        void UppdateraKategori(Guid poddId, Guid nyKategoriId);
         void Delete(string titel);
         void SaveChanges();
 

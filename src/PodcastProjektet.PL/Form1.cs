@@ -16,6 +16,8 @@ namespace PodcastProjektet.PL
         private PoddController _controller;
         private KategoriController _kategoriController;
         private ValideringsController _valideringsController;
+        List<Podd> _poddar;
+        List<Kategori> _kategorier;
 
         public Form1()
         {
@@ -26,18 +28,19 @@ namespace PodcastProjektet.PL
             _controller = new PoddController();
             _kategoriController = new KategoriController();
 
-            _valideringsController= new ValideringsController();
+            _valideringsController = new ValideringsController();
             //UpdateKategoriList();
             UpdateListView();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            List<Kategori> kategorier = _kategoriController.HamtaAllaKategorier();
+            KategoriListView.Items.Clear();
+            _kategorier = _kategoriController.HamtaAllaKategorier();
 
-            foreach (var kategori in kategorier)
+            foreach (var kategori in _kategorier)
             {
-                ListViewItem item = new ListViewItem(kategori.KategoriNamn);
+                ListViewItem item = new ListViewItem(kategori.Namn);
                 KategoriListView.Items.Add(item);
             }
         }
@@ -83,7 +86,7 @@ namespace PodcastProjektet.PL
         {
             string rssUrl = textBox2.Text; // Anta att du har en TextBox för RSS-URL
 
-           
+
 
             if (_valideringsController.KollaOmPoddFinns(rssUrl))
             {
@@ -104,11 +107,11 @@ namespace PodcastProjektet.PL
             UpdateAvsnittListView(newPodd); // Uppdatera avsnitt i listView2
 
 
-           
 
 
 
-            
+
+
 
 
 
@@ -120,7 +123,7 @@ namespace PodcastProjektet.PL
 
         }
 
-        private void UpdateListView()
+        public void UpdateListView()
         {
             // Rensa nuvarande innehåll i ListView
             listView1.Items.Clear();
@@ -128,18 +131,19 @@ namespace PodcastProjektet.PL
             listView2.Items.Clear();
 
             // Hämta alla poddar och fyll i ListView
-            List<Podd> poddar = _controller.GetAllPodcasts();
+            _poddar = _controller.GetAllPodcasts();
 
 
 
-            foreach (var podd in poddar)
+            foreach (var podd in _poddar)
             {
                 // Skapa en ny ListViewItem med poddnamnet
                 var listViewItem = new ListViewItem(podd.AntalAvsnitt); // Använd Podd.title eller CustomName
 
                 listViewItem.SubItems.Add(podd.Titel);
 
-                listViewItem.SubItems.Add(podd.Kategori);
+                //listViewItem.SubItems.Add(podd.Kategori);
+                listViewItem.SubItems.Add(podd.KategoriNamn);
 
                 listViewItem.SubItems.Add(podd.Namn);
 
@@ -151,9 +155,9 @@ namespace PodcastProjektet.PL
 
 
             }
-            if (poddar.Count > 0)
+            if (_poddar.Count > 0)
             {
-                var firstPodd = poddar[0]; // Hämta den första podden
+                var firstPodd = _poddar[0]; // Hämta den första podden
                 UpdateAvsnittListView(firstPodd); // Uppdatera avsnitt i listView2
             }
 
@@ -307,7 +311,7 @@ namespace PodcastProjektet.PL
 
             foreach (var kategori in allaKategorier)
             {
-                ListViewItem item = new ListViewItem(kategori.KategoriNamn);
+                ListViewItem item = new ListViewItem(kategori.Namn);
                 KategoriListView.Items.Add(item);
             }
         }
@@ -317,14 +321,14 @@ namespace PodcastProjektet.PL
             if (KategoriListView.SelectedItems.Count > 0)
             {
                 var selectedItem = KategoriListView.SelectedItems[0];
-                string kategoriNamn = selectedItem.SubItems[0].Text;
+                var kategoriId = _kategorier[KategoriListView.SelectedIndices[0]].Id;
                 string nyKategoriNamn = KategoriTextBox.Text;
 
-                if (!string.IsNullOrWhiteSpace(kategoriNamn) && !string.IsNullOrWhiteSpace(nyKategoriNamn))
+                if (!string.IsNullOrWhiteSpace(nyKategoriNamn))
                 {
                     try
                     {
-                        _kategoriController.UppdateraKategori(kategoriNamn, nyKategoriNamn);
+                        _kategoriController.UppdateraKategori(kategoriId, nyKategoriNamn);
                         MessageBox.Show("Kategorin har uppdaterats framgångsrikt!");
                         UpdateKategoriList();
                     }
@@ -342,6 +346,8 @@ namespace PodcastProjektet.PL
             {
                 MessageBox.Show("Vänligen välj en podd för att uppdatera dess kategori.");
             }
+            UpdateKategoriList();
+            UpdateListView();
 
         }
 
@@ -373,7 +379,7 @@ namespace PodcastProjektet.PL
 
             foreach (var kategori in kategorier)
             {
-                ListViewItem item = new ListViewItem(kategori.KategoriNamn);
+                ListViewItem item = new ListViewItem(kategori.Namn);
                 KategoriListView.Items.Add(item);
 
 
@@ -404,6 +410,13 @@ namespace PodcastProjektet.PL
             {
                 MessageBox.Show("Ingen podd är vald.");
             }
+        }
+
+        private void contextMenuStrip1_MouseClick(object sender, MouseEventArgs e)
+        {
+            var podd = _poddar[listView1.SelectedIndices[0]];
+            var form = new SelectPodCategoryForm(podd, this);
+            form.ShowDialog();
         }
     }
 }

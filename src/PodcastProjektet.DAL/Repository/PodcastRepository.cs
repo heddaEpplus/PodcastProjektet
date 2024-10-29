@@ -111,6 +111,20 @@ namespace PodcastProjektet.DAL.Repository
 
         }
 
+        public void UppdateraKategori(Guid poddId, Guid nyKategoriId)
+        {
+            PoddList = PoddSerializer.Deserialize();
+            for(var i = 0; i<PoddList.Count;i++)
+            {
+                if (PoddList[i].Id == poddId)
+                {
+                    PoddList[i].KategoriId = nyKategoriId;
+                    break;
+                }
+            }
+            SaveChanges();
+        }
+
         public bool AddNewPoddFeed(string rssUrl)
         {
             try
@@ -129,10 +143,10 @@ namespace PodcastProjektet.DAL.Repository
                             // Skapa ett nytt Podd-objekt med information från RSS-flödet
                             var newPodd = new Podd
                             {
-                                Id = Guid.NewGuid().ToString(), // Skapa ett unikt ID för varje podd
+                                Id = Guid.NewGuid(), // Skapa ett unikt ID för varje podd
                                 Titel = feed.Title.Text, // Använd titel från RSS-flödet
                                 AntalAvsnitt = feed.Items.Count().ToString(), //hämta antalavsnitt
-                                Kategori = kategori ?? "Ingen kategori",
+                                //Kategori = kategori ?? "Ingen kategori",
                                 //Kategori = _categoryRepository.HamtaKategori(kategori).KategoriNamn,
                                 Namn = feed.Title.Text, // Använd titel från RSS-flödet
                              

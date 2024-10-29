@@ -28,24 +28,38 @@ namespace PodcastProjektet.BLL
             _categoryRepository.LaggTillKategori(nyKategori);
         }
 
-        public void SkappaDefaultKategori()
+        public Dictionary<Guid, Kategori> HamtaKategoriViaId()
         {
-            _categoryRepository.SkappaDefaultKategori();
+            var kategorier = _categoryRepository.HamtaAllaKategorier();
+            var dictionary = new Dictionary<Guid, Kategori>();
+            foreach (var kategori in kategorier)
+            {
+                dictionary[kategori.Id] = kategori;
+            }
+            return dictionary;
         }
 
-        public void TaBort(string kategori)
+        public void TaBort(Guid kategoriId)
         {
-            _categoryRepository.TaBort(kategori);
+            _categoryRepository.TaBort(kategoriId);
+        }
+        public void TaBort(string kategoriNamn)
+        {
+            var categories = _categoryRepository.HamtaAllaKategorier();
+            var kategori = categories.FirstOrDefault(x => x.Namn == kategoriNamn);
+            if (kategori != null)
+            {
+                _categoryRepository.TaBort(kategori.Id);
+            }
+        }
+        public void UppdateraKategori(Guid kategoriId, string nyKategoriNamn)
+        {
+            _categoryRepository.UppdateraKategori(kategoriId, nyKategoriNamn);
         }
 
-        public void UppdateraKategori(string kategoriNamn, string nyKategoriNamn)
-        {
-            _categoryRepository.UppdateraKategori(kategoriNamn, nyKategoriNamn);
-        }
-
-        public void UppdateraPoddensKategori(string kategoriNamn, string nyKategoriNamn, string podTitel)
-        {
-            _categoryRepository.UppdateraPoddensKategori(kategoriNamn, nyKategoriNamn, podTitel);
-        }
+        //public void UppdateraPoddensKategori(string kategoriNamn, string nyKategoriNamn, string podTitel)
+        //{
+        //    _categoryRepository.UppdateraPoddensKategori(kategoriNamn, nyKategoriNamn, podTitel);
+        //}
     }
 }
