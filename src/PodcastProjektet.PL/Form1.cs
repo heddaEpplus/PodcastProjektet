@@ -213,7 +213,7 @@ namespace PodcastProjektet.PL
                     podd.Namn = nyttNamn; // Uppdatera Podd-objektet
 
                     string poddTitle = selectedItem.SubItems[1].Text;
-                   
+
 
                     _controller.UpdatePodd(poddTitle, nyttNamn);
                     UpdateListView();
@@ -377,7 +377,8 @@ namespace PodcastProjektet.PL
             }
         }
 
-        private void button7_Click(object sender, EventArgs e)
+
+        private void button7_Click_1(object sender, EventArgs e)
         {
             if (listView1.SelectedItems.Count > 0)
             {
@@ -402,7 +403,7 @@ namespace PodcastProjektet.PL
             }
         }
     }
-    }
+}
 
 
 
