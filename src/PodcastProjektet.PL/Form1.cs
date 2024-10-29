@@ -4,6 +4,7 @@ using PodcastProjektet.DAL;
 using PodcastProjektet.DAL.Repository;
 using PodcastProjektet.Models;
 using System;
+using System.Xml;
 
 namespace PodcastProjektet.PL
 {
@@ -14,6 +15,7 @@ namespace PodcastProjektet.PL
         ListViewItem selectedItem;
         private PoddController _controller;
         private KategoriController _kategoriController;
+        private ValideringsController _valideringsController;
 
         public Form1()
         {
@@ -23,6 +25,8 @@ namespace PodcastProjektet.PL
 
             _controller = new PoddController();
             _kategoriController = new KategoriController();
+
+            _valideringsController= new ValideringsController();
             //UpdateKategoriList();
             UpdateListView();
         }
@@ -79,31 +83,34 @@ namespace PodcastProjektet.PL
         {
             string rssUrl = textBox2.Text; // Anta att du har en TextBox för RSS-URL
 
+           
 
-
-            // Skapa en instans av PodcastRepository
-
-
-            // Anropa AddNewPoddFeed-metoden
-
-            bool success = _controller.AddNewPoddFromRSS(rssUrl);
-
-            // Informera användaren om resultatet
-            if (success)
+            if (_valideringsController.KollaOmPoddFinns(rssUrl))
             {
-                MessageBox.Show("Podd-flöde tillagt framgångsrikt!");
-                UpdateListView();
+                MessageBox.Show("Denna podd finns redan!", "", MessageBoxButtons.OK);
+                return;
+            }
 
-                var newPodd = _controller.GetAllPodcasts().Last(); // Hämta den senast tillagda podden
-                UpdateAvsnittListView(newPodd); // Uppdatera avsnitt i listView2
+            if (!_valideringsController.KollaGiltigUrl(rssUrl))
+            {
+                MessageBox.Show("Ogiltigt URL format!", "", MessageBoxButtons.OK);
+                return;
             }
 
 
+            _controller.AddNewPoddFromRSS(rssUrl);
+            var newPodd = _controller.GetAllPodcasts().Last();
+            UpdateListView();// Hämta den senast tillagda podden
+            UpdateAvsnittListView(newPodd); // Uppdatera avsnitt i listView2
 
-            else
-            {
-                MessageBox.Show("Ett fel inträffade vid tillägg av podd-flödet.");
-            }
+
+           
+
+
+
+            
+
+
 
 
         }
@@ -194,44 +201,39 @@ namespace PodcastProjektet.PL
 
         private void button6_Click(object sender, EventArgs e)
         {
-            // Kontrollera om en podd är vald i ListView
             if (listView1.SelectedItems.Count > 0)
             {
-                // Hämta den valda podden
                 var selectedItem = listView1.SelectedItems[0];
-
-                // Hämta det nya namnet från textBox1
                 string nyttNamn = textBox1.Text;
+                string poddTitle = selectedItem.SubItems[1].Text;
 
-                // Om det finns ett nytt namn, uppdatera namnet
+                // Om det finns ett nytt namn, kontrollera att det inte redan finns
                 if (!string.IsNullOrWhiteSpace(nyttNamn))
                 {
-                    // Anta att namnet finns i den sista kolumnen, justera index om det behövs
+                    // Kontrollera om namnet redan finns
+                    if (_valideringsController.KollaOmNamnFinns(nyttNamn))
+                    {
+                        MessageBox.Show("Namnet du angett finns redan!", "", MessageBoxButtons.OK);
+                        return; // Avbryt om namnet redan finns
+                    }
+
+                    // Om valideringen går igenom, uppdatera namnet
                     selectedItem.SubItems[3].Text = nyttNamn; // Index 3 om namnet är i den fjärde kolumnen
 
-                    // Om du även vill uppdatera datakällan, kan du göra det här
+                    // Uppdatera datakällan
                     var podd = (Podd)selectedItem.Tag; // Anta att du har sparat Podd-objektet i Tag
                     podd.Namn = nyttNamn; // Uppdatera Podd-objektet
 
-                    string poddTitle = selectedItem.SubItems[1].Text;
-
-
+                    // Spara ändringar i databasen
                     _controller.UpdatePodd(poddTitle, nyttNamn);
                     UpdateListView();
 
-
-                    // Eventuellt visa ett meddelande till användaren om att uppdateringen sparades.
+                    // Visa ett meddelande till användaren om att uppdateringen sparades.
                     MessageBox.Show("Poddens namn har uppdaterats och sparats.");
                 }
-
-
-
-
             }
-            else
-            {
-                MessageBox.Show("Vänligen välj en podd att uppdatera.");
-            }
+
+
         }
 
         private void textBox6_TextChanged(object sender, EventArgs e)

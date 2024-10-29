@@ -3,9 +3,12 @@ using PodcastProjektet.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
 using System.Linq;
+using System.ServiceModel.Syndication;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace PodcastProjektet.BLL
 {
@@ -46,18 +49,46 @@ namespace PodcastProjektet.BLL
             return finns;
         }
 
-        public bool KollaOmPoddFinns(string poddTitel)
+        public bool KollaOmNamnFinns(string poddNamn)
         {
             bool finns = false;
             foreach (var enPodd in poddRepo.GetAll())
             {
-                if (enPodd.Titel.Equals(poddTitel))
+                if (enPodd.Namn.Equals(poddNamn))
                 {
                     finns = true;
                 }
             }
             return finns;
         }
+
+        public bool KollaOmPoddFinns(string rssUrl)
+        {
+            var selectUrl = from enPodd in poddRepo.GetAll()
+                            where enPodd.Url.Equals(rssUrl)
+                            select enPodd.Url;
+            return selectUrl.Any();
+
+        }
+
+        public bool KollaGiltigUrl(string url)
+        {
+            try
+            {
+                SyndicationFeed syndicationFeed = SyndicationFeed.Load(XmlReader.Create(url));
+
+                foreach (SyndicationItem item in syndicationFeed.Items)
+                {
+                    Debug.Print(item.Title.Text);
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
         
     }
 }
