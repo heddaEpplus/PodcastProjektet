@@ -200,21 +200,22 @@ namespace PodcastProjektet.PL
                 var selectedItem = listView1.SelectedItems[0];
 
                 // Hämta det nya namnet från textBox1
-                string newName = textBox1.Text;
+                string nyttNamn = textBox1.Text;
 
                 // Om det finns ett nytt namn, uppdatera namnet
-                if (!string.IsNullOrWhiteSpace(newName))
+                if (!string.IsNullOrWhiteSpace(nyttNamn))
                 {
                     // Anta att namnet finns i den sista kolumnen, justera index om det behövs
-                    selectedItem.SubItems[3].Text = newName; // Index 3 om namnet är i den fjärde kolumnen
+                    selectedItem.SubItems[3].Text = nyttNamn; // Index 3 om namnet är i den fjärde kolumnen
 
                     // Om du även vill uppdatera datakällan, kan du göra det här
                     var podd = (Podd)selectedItem.Tag; // Anta att du har sparat Podd-objektet i Tag
-                    podd.Namn = newName; // Uppdatera Podd-objektet
+                    podd.Namn = nyttNamn; // Uppdatera Podd-objektet
+
+                    string poddTitle = selectedItem.SubItems[1].Text;
 
 
-
-                    _controller.UpdatePodd(podd);
+                    _controller.UpdatePodd(poddTitle, nyttNamn);
                     UpdateListView();
 
 
@@ -375,7 +376,34 @@ namespace PodcastProjektet.PL
 
             }
         }
+
+
+        private void button7_Click_1(object sender, EventArgs e)
+        {
+            if (listView1.SelectedItems.Count > 0)
+            {
+                // Hämta den valda podden
+                var selectedItem = listView1.SelectedItems[0];
+
+                // Hämta titeln på den valda podden (justera index om titeln är i en annan kolumn)
+                string poddTitle = selectedItem.SubItems[1].Text; // Index 3 om titeln finns i den fjärde kolumnen
+
+                // Anropa delete-metoden med titeln som parameter
+                _controller.DeletePodd(poddTitle);
+
+                // Uppdatera ListView
+                UpdateListView();
+
+                // Visa meddelande till användaren om att podden har tagits bort
+                MessageBox.Show($"Podd '{poddTitle}' har tagits bort.");
+            }
+            else
+            {
+                MessageBox.Show("Ingen podd är vald.");
+            }
+        }
     }
 }
+
 
 
