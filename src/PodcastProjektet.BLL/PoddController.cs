@@ -12,9 +12,11 @@ namespace PodcastProjektet.BLL
     public class PoddController
     {
         IPoddRepository<Podd> podcastRepository;
-            public PoddController()
+        private ValideringsController valideringsController;
+        public PoddController()
         {
             podcastRepository=new PodcastRepository();
+            valideringsController = new ValideringsController();
 
         }
 
@@ -49,8 +51,10 @@ namespace PodcastProjektet.BLL
 
         // Lägg till ett nytt RSS-flöde
         public bool AddNewPoddFromRSS(string rssUrl)
+           
         {
             return ((PodcastRepository)podcastRepository).AddNewPoddFeed(rssUrl);
+           
         }
 
         public List<string> GetAllAvsnittBeskrivningarForPodd(string poddId)
