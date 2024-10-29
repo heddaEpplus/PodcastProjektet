@@ -13,6 +13,7 @@ namespace PodcastProjektet.PL
 
         ListViewItem selectedItem;
         private PoddController _controller;
+        private KategoriController _kategoriController;
 
         public Form1()
         {
@@ -22,11 +23,18 @@ namespace PodcastProjektet.PL
 
             _controller = new PoddController();
             UpdateListView();
+            _kategoriController = new KategoriController();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            List<string> kategorier = _kategoriController.HamtaAllaKategorier();
 
+            foreach (var kategori in kategorier)
+            {
+                ListViewItem item = new ListViewItem(kategori);
+                KategoriListView.Items.Add(item);
+            }
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -261,6 +269,112 @@ namespace PodcastProjektet.PL
                 textBox6.Text = avsnittsBeskrivning;
             }
 
+        }
+
+        private void LaggTillKategori_Click(object sender, EventArgs e)
+        {
+            string nyKategori = KategoriTextBox.Text;
+
+            if (!string.IsNullOrEmpty(nyKategori))
+            {
+                try
+                {
+                    _kategoriController.LaggTillKategori(nyKategori);
+                    MessageBox.Show("Kategorin har lagts till framgångsrikt!");
+                    UpdateKategoriList();
+                    UpdateListView();
+
+                }
+                catch (ArgumentException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Ange ett giltigt kategorinamn.");
+            }
+        }
+
+        private void UpdateKategoriList()
+        {
+            KategoriListView.Items.Clear();
+
+            var allaKategorier = _kategoriController.HamtaAllaKategorier();
+
+            foreach (var kategori in allaKategorier)
+            {
+                ListViewItem item = new ListViewItem(kategori);
+                KategoriListView.Items.Add(item);
+            }
+        }
+
+        private void AndraKategori_Click(object sender, EventArgs e)
+        {
+            if (listView1.SelectedItems.Count > 0)
+            {
+                var selectedItem = listView1.SelectedItems[0];
+                string kategoriNamn = selectedItem.SubItems[0].Text;
+                string nyKategoriNamn = KategoriTextBox.Text;
+
+                if (!string.IsNullOrWhiteSpace(kategoriNamn) && !string.IsNullOrWhiteSpace(nyKategoriNamn))
+                {
+                    try
+                    {
+                        _kategoriController.Uppdatera(kategoriNamn, nyKategoriNamn);
+                        MessageBox.Show("Kategorin har uppdaterats framgångsrikt!");
+                        UpdateListView();
+                    }
+                    catch (ArgumentException ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Både gammal och ny kategori måste anges.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Vänligen välj en podd för att uppdatera dess kategori.");
+            }
+
+        }
+
+        private void TaBortKategori_Click(object sender, EventArgs e)
+        {
+            string kategori = KategoriTextBox.Text;
+            if (!string.IsNullOrWhiteSpace(kategori))
+            {
+                try
+                {
+                    _kategoriController.TaBort(kategori);
+                    MessageBox.Show("Kategorin har tagits bort framgångsrikt!");
+                    UpdateKategoriList();
+                }
+                catch (ArgumentException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Ange ett giltigt kategorinamn för att ta bort.");
+            }
+        }
+
+        private void KategoriListView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            List<string> kategorier = _kategoriController.HamtaAllaKategorier();
+
+            foreach (var kategori in kategorier)
+            {
+                ListViewItem item = new ListViewItem(kategori);
+                KategoriListView.Items.Add(item);
+
+
+            }
         }
 
         private void button7_Click(object sender, EventArgs e)

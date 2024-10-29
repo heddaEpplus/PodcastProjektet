@@ -42,11 +42,11 @@
             button6 = new Button();
             button7 = new Button();
             label4 = new Label();
-            textBox4 = new TextBox();
+            KategoriTextBox = new TextBox();
             label5 = new Label();
-            button5 = new Button();
-            button8 = new Button();
-            button9 = new Button();
+            LaggTillKategori = new Button();
+            AndraKategori = new Button();
+            TaBortKategori = new Button();
             textBox6 = new TextBox();
             listView1 = new ListView();
             Antalavsnitt = new ColumnHeader();
@@ -55,104 +55,89 @@
             columnHeader1 = new ColumnHeader();
             listView2 = new ListView();
             Avsnitt1 = new ColumnHeader();
-            listView3 = new ListView();
+            KategoriListView = new ListView();
+            columnHeader2 = new ColumnHeader();
             SuspendLayout();
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Georgia", 26F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
-            label1.ForeColor = SystemColors.ButtonHighlight;
-            label1.Location = new Point(718, 19);
-            label1.Margin = new Padding(2, 0, 2, 0);
+            label1.Font = new Font("Segoe UI", 18F);
+            label1.Location = new Point(1105, 55);
+            label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(394, 60);
+            label1.Size = new Size(241, 81);
             label1.TabIndex = 3;
-            label1.Text = "PoddPortalen";
+            label1.Text = "Podcast";
             label1.Click += label1_Click;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Font = new Font("Verdana", 10F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
-            label2.ForeColor = SystemColors.ButtonHighlight;
-            label2.Location = new Point(76, 87);
-            label2.Margin = new Padding(2, 0, 2, 0);
+            label2.Location = new Point(130, 160);
+            label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
-            label2.Size = new Size(156, 25);
+            label2.Size = new Size(187, 41);
             label2.TabIndex = 4;
             label2.Text = "Ändra namn:";
             // 
             // textBox1
             // 
-            textBox1.BackColor = Color.LavenderBlush;
-            textBox1.BorderStyle = BorderStyle.None;
-            textBox1.Location = new Point(76, 125);
-            textBox1.Margin = new Padding(2);
-            textBox1.Multiline = true;
+            textBox1.Location = new Point(130, 205);
+            textBox1.Margin = new Padding(4);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(289, 31);
+            textBox1.Size = new Size(639, 47);
             textBox1.TabIndex = 5;
             textBox1.TextChanged += textBox1_TextChanged;
             // 
             // comboBox2
             // 
-            comboBox2.BackColor = Color.LavenderBlush;
             comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new Point(76, 164);
-            comboBox2.Margin = new Padding(2);
+            comboBox2.Location = new Point(130, 269);
+            comboBox2.Margin = new Padding(4);
             comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(289, 33);
+            comboBox2.Size = new Size(374, 49);
             comboBox2.TabIndex = 7;
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Font = new Font("Verdana", 10F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
-            label3.ForeColor = SystemColors.ButtonHighlight;
-            label3.Location = new Point(442, 168);
-            label3.Margin = new Padding(2, 0, 2, 0);
+            label3.Location = new Point(808, 336);
+            label3.Margin = new Padding(4, 0, 4, 0);
             label3.Name = "label3";
-            label3.Size = new Size(65, 25);
+            label3.Size = new Size(78, 41);
             label3.TabIndex = 8;
             label3.Text = "URL:";
             // 
             // textBox2
             // 
-            textBox2.BackColor = Color.LavenderBlush;
-            textBox2.BorderStyle = BorderStyle.None;
-            textBox2.Location = new Point(511, 166);
-            textBox2.Margin = new Padding(2);
-            textBox2.Multiline = true;
+            textBox2.Location = new Point(920, 326);
+            textBox2.Margin = new Padding(4);
             textBox2.Name = "textBox2";
-            textBox2.Size = new Size(222, 30);
+            textBox2.Size = new Size(493, 47);
             textBox2.TabIndex = 9;
             textBox2.TextChanged += textBox2_TextChanged;
             // 
             // comboBox3
             // 
-            comboBox3.BackColor = Color.LavenderBlush;
             comboBox3.FormattingEnabled = true;
-            comboBox3.Location = new Point(511, 125);
-            comboBox3.Margin = new Padding(2);
+            comboBox3.Location = new Point(920, 203);
+            comboBox3.Margin = new Padding(4);
             comboBox3.Name = "comboBox3";
-            comboBox3.Size = new Size(222, 33);
+            comboBox3.Size = new Size(374, 49);
             comboBox3.TabIndex = 10;
             // 
             // button2
             // 
-            button2.BackColor = Color.PaleVioletRed;
-            button2.Font = new Font("Verdana", 9F);
-            button2.ForeColor = SystemColors.ButtonHighlight;
-            button2.Location = new Point(791, 121);
-            button2.Margin = new Padding(2);
+            button2.Location = new Point(1449, 203);
+            button2.Margin = new Padding(4);
             button2.Name = "button2";
-            button2.Size = new Size(111, 35);
+            button2.Size = new Size(189, 57);
             button2.TabIndex = 11;
             button2.Text = "Återställ";
-            button2.UseVisualStyleBackColor = false;
+            button2.UseVisualStyleBackColor = true;
             // 
-            // laggTill
+            // button4
             // 
             laggTill.BackColor = Color.PaleVioletRed;
             laggTill.Font = new Font("Verdana", 9F);
@@ -168,121 +153,108 @@
             // 
             // button6
             // 
-            button6.BackColor = Color.PaleVioletRed;
-            button6.Font = new Font("Verdana", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button6.ForeColor = SystemColors.ButtonHighlight;
-            button6.Location = new Point(76, 205);
-            button6.Margin = new Padding(2);
+            button6.Location = new Point(130, 336);
+            button6.Margin = new Padding(4);
             button6.Name = "button6";
-            button6.Size = new Size(138, 35);
+            button6.Size = new Size(189, 57);
             button6.TabIndex = 15;
             button6.Text = "Ändra";
-            button6.UseVisualStyleBackColor = false;
+            button6.UseVisualStyleBackColor = true;
             button6.Click += button6_Click;
             // 
             // button7
             // 
-            button7.BackColor = Color.PaleVioletRed;
-            button7.Font = new Font("Verdana", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button7.ForeColor = SystemColors.ButtonHighlight;
-            button7.Location = new Point(235, 205);
-            button7.Margin = new Padding(2);
+            button7.Location = new Point(359, 336);
+            button7.Margin = new Padding(4);
             button7.Name = "button7";
-            button7.Size = new Size(130, 35);
+            button7.Size = new Size(189, 57);
             button7.TabIndex = 16;
             button7.Text = "Ta bort";
-            button7.UseVisualStyleBackColor = false;
-            button7.Click += button7_Click;
+            button7.UseVisualStyleBackColor = true;
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Font = new Font("Verdana", 10F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
-            label4.ForeColor = SystemColors.ButtonHighlight;
-            label4.Location = new Point(1127, 201);
-            label4.Margin = new Padding(2, 0, 2, 0);
+            label4.Location = new Point(1912, 390);
+            label4.Margin = new Padding(4, 0, 4, 0);
             label4.Name = "label4";
-            label4.Size = new Size(92, 25);
+            label4.Size = new Size(107, 41);
             label4.TabIndex = 18;
             label4.Text = "Avsnitt";
             // 
-            // textBox4
+            // KategoriTextBox
             // 
-            textBox4.Location = new Point(1355, 201);
-            textBox4.Margin = new Padding(2);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(342, 31);
-            textBox4.TabIndex = 19;
+            KategoriTextBox.Location = new Point(2304, 330);
+            KategoriTextBox.Margin = new Padding(4);
+            KategoriTextBox.Name = "KategoriTextBox";
+            KategoriTextBox.Size = new Size(578, 47);
+            KategoriTextBox.TabIndex = 19;
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(1492, 160);
-            label5.Margin = new Padding(2, 0, 2, 0);
+            label5.Location = new Point(2537, 262);
+            label5.Margin = new Padding(4, 0, 4, 0);
             label5.Name = "label5";
-            label5.Size = new Size(78, 25);
+            label5.Size = new Size(129, 41);
             label5.TabIndex = 20;
             label5.Text = "Kategori";
             label5.Click += label5_Click;
             // 
-            // button5
+            // LaggTillKategori
             // 
-            button5.Location = new Point(1355, 238);
-            button5.Margin = new Padding(2);
-            button5.Name = "button5";
-            button5.Size = new Size(111, 35);
-            button5.TabIndex = 21;
-            button5.Text = "Lägg till";
-            button5.UseVisualStyleBackColor = true;
+            LaggTillKategori.Location = new Point(2304, 390);
+            LaggTillKategori.Margin = new Padding(4);
+            LaggTillKategori.Name = "LaggTillKategori";
+            LaggTillKategori.Size = new Size(189, 57);
+            LaggTillKategori.TabIndex = 21;
+            LaggTillKategori.Text = "Lägg till";
+            LaggTillKategori.UseVisualStyleBackColor = true;
+            LaggTillKategori.Click += LaggTillKategori_Click;
             // 
-            // button8
+            // AndraKategori
             // 
-            button8.Location = new Point(1470, 238);
-            button8.Margin = new Padding(2);
-            button8.Name = "button8";
-            button8.Size = new Size(111, 35);
-            button8.TabIndex = 22;
-            button8.Text = "Ändra";
-            button8.UseVisualStyleBackColor = true;
+            AndraKategori.Location = new Point(2499, 390);
+            AndraKategori.Margin = new Padding(4);
+            AndraKategori.Name = "AndraKategori";
+            AndraKategori.Size = new Size(189, 57);
+            AndraKategori.TabIndex = 22;
+            AndraKategori.Text = "Ändra";
+            AndraKategori.UseVisualStyleBackColor = true;
+            AndraKategori.Click += AndraKategori_Click;
             // 
-            // button9
+            // TaBortKategori
             // 
-            button9.Location = new Point(1585, 238);
-            button9.Margin = new Padding(2);
-            button9.Name = "button9";
-            button9.Size = new Size(111, 35);
-            button9.TabIndex = 23;
-            button9.Text = "Ta bort";
-            button9.UseVisualStyleBackColor = true;
+            TaBortKategori.Location = new Point(2694, 390);
+            TaBortKategori.Margin = new Padding(4);
+            TaBortKategori.Name = "TaBortKategori";
+            TaBortKategori.Size = new Size(189, 57);
+            TaBortKategori.TabIndex = 23;
+            TaBortKategori.Text = "Ta bort";
+            TaBortKategori.UseVisualStyleBackColor = true;
+            TaBortKategori.Click += TaBortKategori_Click;
             // 
             // textBox6
             // 
-            textBox6.BackColor = Color.LavenderBlush;
-            textBox6.BorderStyle = BorderStyle.None;
-            textBox6.ForeColor = Color.PaleVioletRed;
-            textBox6.Location = new Point(1355, 459);
-            textBox6.Margin = new Padding(2);
+            textBox6.Location = new Point(2304, 752);
+            textBox6.Margin = new Padding(4);
             textBox6.Multiline = true;
             textBox6.Name = "textBox6";
             textBox6.ReadOnly = true;
             textBox6.ScrollBars = ScrollBars.Both;
-            textBox6.Size = new Size(342, 150);
+            textBox6.Size = new Size(578, 244);
             textBox6.TabIndex = 25;
             textBox6.TextChanged += textBox6_TextChanged;
             // 
             // listView1
             // 
-            listView1.BackColor = Color.LavenderBlush;
-            listView1.BorderStyle = BorderStyle.None;
             listView1.Columns.AddRange(new ColumnHeader[] { Antalavsnitt, Titel, Kategori, columnHeader1 });
-            listView1.Font = new Font("Verdana", 10F, FontStyle.Italic, GraphicsUnit.Point, 0);
-            listView1.ForeColor = Color.PaleVioletRed;
             listView1.FullRowSelect = true;
             listView1.GridLines = true;
-            listView1.Location = new Point(76, 260);
-            listView1.Margin = new Padding(2);
+            listView1.Location = new Point(134, 439);
+            listView1.Margin = new Padding(4);
             listView1.Name = "listView1";
-            listView1.Size = new Size(863, 362);
+            listView1.Size = new Size(1464, 590);
             listView1.TabIndex = 26;
             listView1.UseCompatibleStateImageBehavior = false;
             listView1.View = View.Details;
@@ -310,19 +282,15 @@
             // 
             // listView2
             // 
-            listView2.BackColor = Color.LavenderBlush;
-            listView2.BorderStyle = BorderStyle.None;
             listView2.Columns.AddRange(new ColumnHeader[] { Avsnitt1 });
-            listView2.Font = new Font("Verdana", 10F, FontStyle.Italic, GraphicsUnit.Point, 0);
-            listView2.ForeColor = Color.PaleVioletRed;
             listView2.FullRowSelect = true;
             listView2.GridLines = true;
             listView2.Items.AddRange(new ListViewItem[] { listViewItem1 });
-            listView2.Location = new Point(1027, 260);
-            listView2.Margin = new Padding(2);
+            listView2.Location = new Point(1732, 472);
+            listView2.Margin = new Padding(4);
             listView2.MultiSelect = false;
             listView2.Name = "listView2";
-            listView2.Size = new Size(286, 362);
+            listView2.Size = new Size(484, 558);
             listView2.TabIndex = 29;
             listView2.UseCompatibleStateImageBehavior = false;
             listView2.View = View.Details;
@@ -333,34 +301,40 @@
             Avsnitt1.Text = "Avsnitt";
             Avsnitt1.Width = 250;
             // 
-            // listView3
+            // KategoriListView
             // 
-            listView3.Enabled = false;
-            listView3.GridLines = true;
-            listView3.Items.AddRange(new ListViewItem[] { listViewItem2 });
-            listView3.Location = new Point(1355, 288);
-            listView3.Margin = new Padding(2);
-            listView3.Name = "listView3";
-            listView3.Size = new Size(342, 148);
-            listView3.TabIndex = 30;
-            listView3.UseCompatibleStateImageBehavior = false;
-            listView3.View = View.Details;
+            KategoriListView.Columns.AddRange(new ColumnHeader[] { columnHeader2 });
+            KategoriListView.Enabled = false;
+            KategoriListView.GridLines = true;
+            KategoriListView.Items.AddRange(new ListViewItem[] { listViewItem2 });
+            KategoriListView.Location = new Point(2304, 472);
+            KategoriListView.Margin = new Padding(4);
+            KategoriListView.Name = "KategoriListView";
+            KategoriListView.Size = new Size(578, 240);
+            KategoriListView.TabIndex = 30;
+            KategoriListView.UseCompatibleStateImageBehavior = false;
+            KategoriListView.View = View.Details;
+            KategoriListView.SelectedIndexChanged += KategoriListView_SelectedIndexChanged;
+            // 
+            // columnHeader2
+            // 
+            columnHeader2.Text = "Kategorier";
+            columnHeader2.Width = 400;
             // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(17F, 41F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.Pink;
-            ClientSize = new Size(1792, 858);
-            Controls.Add(listView3);
+            ClientSize = new Size(3047, 1406);
+            Controls.Add(KategoriListView);
             Controls.Add(listView2);
             Controls.Add(listView1);
             Controls.Add(textBox6);
-            Controls.Add(button9);
-            Controls.Add(button8);
-            Controls.Add(button5);
+            Controls.Add(TaBortKategori);
+            Controls.Add(AndraKategori);
+            Controls.Add(LaggTillKategori);
             Controls.Add(label5);
-            Controls.Add(textBox4);
+            Controls.Add(KategoriTextBox);
             Controls.Add(label4);
             Controls.Add(button7);
             Controls.Add(button6);
@@ -373,7 +347,7 @@
             Controls.Add(textBox1);
             Controls.Add(label2);
             Controls.Add(label1);
-            Margin = new Padding(2);
+            Margin = new Padding(4);
             Name = "Form1";
             Text = "Form1";
             Load += Form1_Load;
@@ -394,19 +368,20 @@
         private Button button6;
         private Button button7;
         private Label label4;
-        private TextBox textBox4;
+        private TextBox KategoriTextBox;
         private Label label5;
-        private Button button5;
-        private Button button8;
-        private Button button9;
+        private Button LaggTillKategori;
+        private Button AndraKategori;
+        private Button TaBortKategori;
         private TextBox textBox6;
         private ListView listView1;
         private ColumnHeader Antalavsnitt;
         private ColumnHeader Titel;
         private ColumnHeader Kategori;
         private ListView listView2;
-        private ListView listView3;
+        private ListView KategoriListView;
         private ColumnHeader columnHeader1;
         private ColumnHeader Avsnitt1;
+        private ColumnHeader columnHeader2;
     }
 }
