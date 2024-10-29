@@ -305,7 +305,7 @@
             // KategoriListView
             // 
             KategoriListView.Columns.AddRange(new ColumnHeader[] { columnHeader2 });
-            KategoriListView.Enabled = false;
+            KategoriListView.FullRowSelect = true;
             KategoriListView.GridLines = true;
             KategoriListView.Items.AddRange(new ListViewItem[] { listViewItem2 });
             KategoriListView.Location = new Point(1355, 288);

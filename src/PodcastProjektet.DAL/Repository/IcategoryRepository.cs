@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PodcastProjektet.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,11 +12,11 @@ namespace PodcastProjektet.DAL.Repository
     {
         public void TaBort(string kategori);
 
-        public void Uppdatera(string kategoriNamn, string nyKategoriNamn);
-        public List<string> HamtaAllaKategorier();
+        public void UppdateraKategori(string kategoriNamn, string nyKategoriNamn);
+        public List<Kategori> HamtaAllaKategorier();
         public void SkappaDefaultKategori();
         public void LaggTillKategori(string nyKategori);
-        public void Uppdatera(string kategoriNamn, string nyKategoriNamn, string podTitel);
+        public void UppdateraPoddensKategori(string kategoriNamn, string nyKategoriNamn, string podTitel);
   
 
 
