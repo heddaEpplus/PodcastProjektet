@@ -25,6 +25,8 @@ namespace PodcastProjektet.PL
 
             _controller = new PoddController();
             _kategoriController = new KategoriController();
+
+            _valideringsController= new ValideringsController();
             //UpdateKategoriList();
             UpdateListView();
         }
