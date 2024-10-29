@@ -38,14 +38,14 @@ namespace PodcastProjektet.BLL
             _categoryRepository.TaBort(kategori);
         }
 
-        public void Uppdatera(string kategoriNamn, string nyKategoriNamn)
+        public void UppdateraKategori(string kategoriNamn, string nyKategoriNamn)
         {
-            _categoryRepository.Uppdatera(kategoriNamn, nyKategoriNamn);
+            _categoryRepository.UppdateraKategori(kategoriNamn, nyKategoriNamn);
         }
 
-        public void Uppdatera(string kategoriNamn, string nyKategoriNamn, string podTitel)
+        public void UppdateraPoddensKategori(string kategoriNamn, string nyKategoriNamn, string podTitel)
         {
-            _categoryRepository.Uppdatera(kategoriNamn, nyKategoriNamn, podTitel);
+            _categoryRepository.UppdateraPoddensKategori(kategoriNamn, nyKategoriNamn, podTitel);
         }
     }
 }

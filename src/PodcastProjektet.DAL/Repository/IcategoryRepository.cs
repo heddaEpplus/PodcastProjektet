@@ -12,11 +12,11 @@ namespace PodcastProjektet.DAL.Repository
     {
         public void TaBort(string kategori);
 
-        public void Uppdatera(string kategoriNamn, string nyKategoriNamn);
+        public void UppdateraKategori(string kategoriNamn, string nyKategoriNamn);
         public List<Kategori> HamtaAllaKategorier();
         public void SkappaDefaultKategori();
         public void LaggTillKategori(string nyKategori);
-        public void Uppdatera(string kategoriNamn, string nyKategoriNamn, string podTitel);
+        public void UppdateraPoddensKategori(string kategoriNamn, string nyKategoriNamn, string podTitel);
   
 
 

@@ -311,9 +311,9 @@ namespace PodcastProjektet.PL
 
         private void AndraKategori_Click(object sender, EventArgs e)
         {
-            if (listView1.SelectedItems.Count > 0)
+            if (KategoriListView.SelectedItems.Count > 0)
             {
-                var selectedItem = listView1.SelectedItems[0];
+                var selectedItem = KategoriListView.SelectedItems[0];
                 string kategoriNamn = selectedItem.SubItems[0].Text;
                 string nyKategoriNamn = KategoriTextBox.Text;
 
@@ -321,9 +321,9 @@ namespace PodcastProjektet.PL
                 {
                     try
                     {
-                        _kategoriController.Uppdatera(kategoriNamn, nyKategoriNamn);
+                        _kategoriController.UppdateraKategori(kategoriNamn, nyKategoriNamn);
                         MessageBox.Show("Kategorin har uppdaterats framgångsrikt!");
-                        UpdateListView();
+                        UpdateKategoriList();
                     }
                     catch (ArgumentException ex)
                     {

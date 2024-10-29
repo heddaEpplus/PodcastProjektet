@@ -93,7 +93,7 @@ namespace PodcastProjektet.DAL.Repository
             }
         }
 
-        public void Uppdatera(string kategoriNamn, string nyKategoriNamn)
+        public void UppdateraKategori(string kategoriNamn, string nyKategoriNamn)
         {
             var kategoriAttUppdatera = kategoriLista.FirstOrDefault(k => k.KategoriNamn == kategoriNamn);
             if (kategoriAttUppdatera != null)
@@ -107,7 +107,7 @@ namespace PodcastProjektet.DAL.Repository
             }
         }
 
-        public void Uppdatera(string kategoriNamn, string nyKategoriNamn, string podTitel)
+        public void UppdateraPoddensKategori(string kategoriNamn, string nyKategoriNamn, string podTitel)
         {
             var kategoriAttUppdatera = kategoriLista.FirstOrDefault(k => k.KategoriNamn == kategoriNamn);
 
