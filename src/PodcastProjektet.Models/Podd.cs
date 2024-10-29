@@ -27,5 +27,7 @@ namespace PodcastProjektet.Models
             return Titel;
         }
 
+        
+
     }
 }
