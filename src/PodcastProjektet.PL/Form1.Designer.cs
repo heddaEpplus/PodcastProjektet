@@ -29,15 +29,15 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            ListViewItem listViewItem1 = new ListViewItem("");
-            ListViewItem listViewItem2 = new ListViewItem("");
+            ListViewItem listViewItem3 = new ListViewItem("");
+            ListViewItem listViewItem4 = new ListViewItem("");
             label1 = new Label();
             label2 = new Label();
             textBox1 = new TextBox();
             comboBox2 = new ComboBox();
             label3 = new Label();
             textBox2 = new TextBox();
-            comboBox3 = new ComboBox();
+            SorteraKategoriComboBox = new ComboBox();
             button2 = new Button();
             laggTill = new Button();
             button6 = new Button();
@@ -60,6 +60,8 @@
             Avsnitt1 = new ColumnHeader();
             KategoriListView = new ListView();
             columnHeader2 = new ColumnHeader();
+            KategoriLabel = new Label();
+            btnKategori = new Button();
             contextMenuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -116,13 +118,13 @@
             textBox2.TabIndex = 9;
             textBox2.TextChanged += textBox2_TextChanged;
             // 
-            // comboBox3
+            // SorteraKategoriComboBox
             // 
-            comboBox3.FormattingEnabled = true;
-            comboBox3.Location = new Point(920, 203);
-            comboBox3.Name = "comboBox3";
-            comboBox3.Size = new Size(375, 49);
-            comboBox3.TabIndex = 10;
+            SorteraKategoriComboBox.FormattingEnabled = true;
+            SorteraKategoriComboBox.Location = new Point(920, 203);
+            SorteraKategoriComboBox.Name = "SorteraKategoriComboBox";
+            SorteraKategoriComboBox.Size = new Size(375, 49);
+            SorteraKategoriComboBox.TabIndex = 10;
             // 
             // button2
             // 
@@ -273,13 +275,13 @@
             contextMenuStrip1.ImageScalingSize = new Size(40, 40);
             contextMenuStrip1.Items.AddRange(new ToolStripItem[] { setCategoryMenuItem });
             contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new Size(361, 107);
+            contextMenuStrip1.Size = new Size(260, 52);
             contextMenuStrip1.MouseClick += contextMenuStrip1_MouseClick;
             // 
             // setCategoryMenuItem
             // 
             setCategoryMenuItem.Name = "setCategoryMenuItem";
-            setCategoryMenuItem.Size = new Size(360, 48);
+            setCategoryMenuItem.Size = new Size(259, 48);
             setCategoryMenuItem.Text = "Välj kategori";
             // 
             // listView2
@@ -287,7 +289,7 @@
             listView2.Columns.AddRange(new ColumnHeader[] { Avsnitt1 });
             listView2.FullRowSelect = true;
             listView2.GridLines = true;
-            listView2.Items.AddRange(new ListViewItem[] { listViewItem1 });
+            listView2.Items.AddRange(new ListViewItem[] { listViewItem3 });
             listView2.Location = new Point(1732, 472);
             listView2.MultiSelect = false;
             listView2.Name = "listView2";
@@ -307,7 +309,7 @@
             KategoriListView.Columns.AddRange(new ColumnHeader[] { columnHeader2 });
             KategoriListView.FullRowSelect = true;
             KategoriListView.GridLines = true;
-            KategoriListView.Items.AddRange(new ListViewItem[] { listViewItem2 });
+            KategoriListView.Items.AddRange(new ListViewItem[] { listViewItem4 });
             KategoriListView.Location = new Point(2304, 472);
             KategoriListView.Name = "KategoriListView";
             KategoriListView.Size = new Size(579, 240);
@@ -321,11 +323,32 @@
             columnHeader2.Text = "Kategorier";
             columnHeader2.Width = 400;
             // 
+            // KategoriLabel
+            // 
+            KategoriLabel.AutoSize = true;
+            KategoriLabel.Location = new Point(920, 159);
+            KategoriLabel.Name = "KategoriLabel";
+            KategoriLabel.Size = new Size(306, 41);
+            KategoriLabel.TabIndex = 31;
+            KategoriLabel.Text = "Sortera efter kategori:";
+            // 
+            // btnKategori
+            // 
+            btnKategori.Location = new Point(1301, 203);
+            btnKategori.Name = "btnKategori";
+            btnKategori.Size = new Size(129, 49);
+            btnKategori.TabIndex = 32;
+            btnKategori.Text = "Välj";
+            btnKategori.UseVisualStyleBackColor = true;
+            btnKategori.Click += btnKategori_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(17F, 41F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(2857, 1050);
+            Controls.Add(btnKategori);
+            Controls.Add(KategoriLabel);
             Controls.Add(KategoriListView);
             Controls.Add(listView2);
             Controls.Add(listView1);
@@ -340,7 +363,7 @@
             Controls.Add(button6);
             Controls.Add(laggTill);
             Controls.Add(button2);
-            Controls.Add(comboBox3);
+            Controls.Add(SorteraKategoriComboBox);
             Controls.Add(textBox2);
             Controls.Add(label3);
             Controls.Add(comboBox2);
@@ -362,7 +385,7 @@
         private ComboBox comboBox2;
         private Label label3;
         private TextBox textBox2;
-        private ComboBox comboBox3;
+        private ComboBox SorteraKategoriComboBox;
         private Button button2;
         private Button laggTill;
         private Button button6;
@@ -385,5 +408,7 @@
         private ColumnHeader columnHeader2;
         private ContextMenuStrip contextMenuStrip1;
         private ToolStripMenuItem setCategoryMenuItem;
+        private Label KategoriLabel;
+        private Button btnKategori;
     }
 }

@@ -43,6 +43,12 @@ namespace PodcastProjektet.PL
                 ListViewItem item = new ListViewItem(kategori.Namn);
                 KategoriListView.Items.Add(item);
             }
+            SorteraKategoriComboBox.Items.Clear();
+            foreach (var kategori in _kategorier)
+            {
+                SorteraKategoriComboBox.Items.Add(kategori.Namn);
+            }
+            UpdateKategoriComboBox();
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -284,14 +290,21 @@ namespace PodcastProjektet.PL
 
             if (!string.IsNullOrEmpty(nyKategori))
             {
-                try
-                {
-                    _kategoriController.LaggTillKategori(nyKategori);
-                    MessageBox.Show("Kategorin har lagts till framgångsrikt!");
-                    UpdateKategoriList();
-                    UpdateListView();
+                if (_valideringsController.KollaOmKategoriFinns(nyKategori) == true)
+                 {
+                    MessageBox.Show(nyKategori + " finns redan registrerad som kategori.");
+                    return;
+                 }
 
-                }
+                    try
+                    {
+                        _kategoriController.LaggTillKategori(nyKategori);
+                        MessageBox.Show("Kategorin har lagts till framgångsrikt!");
+                        UpdateKategoriList();
+                        UpdateKategoriComboBox();
+                        UpdateListView();
+
+                    }
                 catch (ArgumentException ex)
                 {
                     MessageBox.Show(ex.Message);
@@ -316,6 +329,18 @@ namespace PodcastProjektet.PL
             }
         }
 
+        private void UpdateKategoriComboBox()
+        {
+            SorteraKategoriComboBox.Items.Clear();
+            SorteraKategoriComboBox.Items.Add("Alla");
+            _kategorier = _kategoriController.HamtaAllaKategorier();
+
+            foreach (var kategori in _kategorier)
+            {
+                SorteraKategoriComboBox.Items.Add(kategori.Namn);
+            }
+        }
+
         private void AndraKategori_Click(object sender, EventArgs e)
         {
             if (KategoriListView.SelectedItems.Count > 0)
@@ -323,7 +348,6 @@ namespace PodcastProjektet.PL
                 var selectedItem = KategoriListView.SelectedItems[0];
                 var kategoriId = _kategorier[KategoriListView.SelectedIndices[0]].Id;
                 string nyKategoriNamn = KategoriTextBox.Text;
-
                 if (!string.IsNullOrWhiteSpace(nyKategoriNamn))
                 {
                     try
@@ -347,6 +371,7 @@ namespace PodcastProjektet.PL
                 MessageBox.Show("Vänligen välj en podd för att uppdatera dess kategori.");
             }
             UpdateKategoriList();
+            UpdateKategoriComboBox();
             UpdateListView();
 
         }
@@ -356,15 +381,26 @@ namespace PodcastProjektet.PL
             string kategori = KategoriTextBox.Text;
             if (!string.IsNullOrWhiteSpace(kategori))
             {
-                try
+                var confirmResult = MessageBox.Show(
+                "Är du säker på att du vill ta bort kategorin?",
+                "Bekräfta borttagning",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning
+             );
+                if (confirmResult == DialogResult.Yes)
                 {
-                    _kategoriController.TaBort(kategori);
-                    MessageBox.Show("Kategorin har tagits bort framgångsrikt!");
-                    UpdateKategoriList();
-                }
-                catch (ArgumentException ex)
-                {
-                    MessageBox.Show(ex.Message);
+                    try
+                    {
+                        _kategoriController.TaBort(kategori);
+                        MessageBox.Show("Kategorin har tagits bort framgångsrikt!");
+                        UpdateKategoriList();
+                        UpdateKategoriComboBox();
+                        UpdateListView();
+                    }
+                    catch (ArgumentException ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
                 }
             }
             else
@@ -417,6 +453,44 @@ namespace PodcastProjektet.PL
             var podd = _poddar[listView1.SelectedIndices[0]];
             var form = new SelectPodCategoryForm(podd, this);
             form.ShowDialog();
+        }
+
+        private void btnKategori_Click(object sender, EventArgs e)
+        {
+            if (SorteraKategoriComboBox.SelectedItem != null)
+            {
+                string valdKategori = SorteraKategoriComboBox.SelectedItem.ToString();
+
+                if (valdKategori == "Alla")
+                {
+                    UpdateListView();
+                }
+                else
+                {
+                    FiltreraPoddarViaKategori(valdKategori); 
+                }
+            }
+            else
+            {
+                MessageBox.Show("Välj en kategori att filtrera efter.", "Ingen kategori vald", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+        private void FiltreraPoddarViaKategori(string valdKategori)
+        {
+            listView1.Items.Clear();
+
+            var filteredPoddar = _poddar.Where(p => p.KategoriNamn == valdKategori).ToList();
+
+            foreach (var podd in filteredPoddar)
+            {
+                var listViewItem = new ListViewItem(podd.AntalAvsnitt);
+                listViewItem.SubItems.Add(podd.Titel);
+                listViewItem.SubItems.Add(podd.KategoriNamn);
+                listViewItem.SubItems.Add(podd.Namn);
+                listViewItem.Tag = podd;
+
+                listView1.Items.Add(listViewItem);
+            }
         }
     }
 }
