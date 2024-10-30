@@ -14,13 +14,11 @@ namespace PodcastProjektet.DAL.Repository
 {
     public class PodcastRepository : IPoddRepository<Podd>
     {
-        //private readonly string _rssUrl;
         Serializer<Podd> PoddSerializer;
         List<Podd> PoddList;
 
         public PodcastRepository()
         {
-            //_rssUrl = rssUrl;
             PoddList = new List<Podd>();
             PoddSerializer = new Serializer<Podd>(nameof(PoddList));
             
@@ -92,12 +90,11 @@ namespace PodcastProjektet.DAL.Repository
 
             if (node != null)
             {
-                // Uppdatera namnet på podden
                 var namnElement = node.Element("Namn");
                 if (namnElement != null)
                 {
-                    namnElement.Value = nyttNamn; // Sätt det nya namnet
-                    doc.Save("PoddList.xml"); // Spara ändringarna till filen
+                    namnElement.Value = nyttNamn; 
+                    doc.Save("PoddList.xml");
                 }
                 else
                 {
@@ -109,6 +106,20 @@ namespace PodcastProjektet.DAL.Repository
                 Console.WriteLine("Ingen podd hittades med titeln: " + titel);
             }
 
+        }
+
+        public void UppdateraKategori(Guid poddId, Guid nyKategoriId)
+        {
+            PoddList = PoddSerializer.Deserialize();
+            for(var i = 0; i<PoddList.Count;i++)
+            {
+                if (PoddList[i].Id == poddId)
+                {
+                    PoddList[i].KategoriId = nyKategoriId;
+                    break;
+                }
+            }
+            SaveChanges();
         }
 
         public bool AddNewPoddFeed(string rssUrl)
@@ -125,18 +136,14 @@ namespace PodcastProjektet.DAL.Repository
                                            select c.Attribute("text")?.Value).FirstOrDefault();
                         if (feed.ElementExtensions.Count > 0)
                         {
-                            
-                            // Skapa ett nytt Podd-objekt med information från RSS-flödet
                             var newPodd = new Podd
                             {
-                                Id = Guid.NewGuid().ToString(), // Skapa ett unikt ID för varje podd
-                                Titel = feed.Title.Text, // Använd titel från RSS-flödet
-                                AntalAvsnitt = feed.Items.Count().ToString(), //hämta antalavsnitt
-                                Kategori = kategori ?? "Ingen kategori",
-                                //Kategori = _categoryRepository.HamtaKategori(kategori).KategoriNamn,
-                                Namn = feed.Title.Text, // Använd titel från RSS-flödet
+                                Id = Guid.NewGuid(), 
+                                Titel = feed.Title.Text, 
+                                AntalAvsnitt = feed.Items.Count().ToString(), 
+                                Namn = feed.Title.Text, 
                              
-                                Url = rssUrl // Spara URL till flödet
+                                Url = rssUrl
                             };
 
                             foreach (var item in feed.Items)
@@ -147,15 +154,14 @@ namespace PodcastProjektet.DAL.Repository
                                     Beskrivning = item.Summary?.Text ?? "Ingen beskrivning tillgänglig",
                                    
                                 };
-                                newPodd.AvsnittLista.Add(avsnitt); // Lägg till avsnittet i Podd
+                                newPodd.AvsnittLista.Add(avsnitt); 
                             }
 
                             PoddList = PoddSerializer.Deserialize();
-                            // Lägg till det nya podd-objektet till listan och spara ändringarna
                             PoddList.Add(newPodd);
                             SaveChanges();
 
-                            return true; // Indikerar att tillägget lyckades
+                            return true; 
                         }
                     }
                 }
@@ -165,7 +171,7 @@ namespace PodcastProjektet.DAL.Repository
                 Console.WriteLine("Det uppstod ett fel vid tillägg av RSS-flödet: " + ex.Message);
             }
 
-            return false; // Indikerar att tillägget misslyckades
+            return false; 
         }
     }
 }

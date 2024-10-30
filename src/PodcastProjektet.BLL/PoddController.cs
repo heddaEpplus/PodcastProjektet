@@ -13,16 +13,25 @@ namespace PodcastProjektet.BLL
     {
         IPoddRepository<Podd> podcastRepository;
         private ValideringsController valideringsController;
+        private readonly KategoriController kategoriController;
         public PoddController()
         {
             podcastRepository=new PodcastRepository();
             valideringsController = new ValideringsController();
+            kategoriController = new KategoriController();
 
         }
 
         public List<Podd> GetAllPodcasts()
         {
-            return podcastRepository.GetAll();
+            var podcasts = podcastRepository.GetAll();
+            var categories = kategoriController.HamtaKategoriViaId();
+            foreach(var podcast in podcasts)
+            {
+                if (podcast.KategoriId == Guid.Empty || !categories.ContainsKey(podcast.KategoriId)) continue;
+                podcast.KategoriNamn = categories[podcast.KategoriId].Namn;
+            }
+            return podcasts;
         }
 
         // Hämta en podd baserat på ID
@@ -41,6 +50,11 @@ namespace PodcastProjektet.BLL
         public void UpdatePodd(string titel, string nyttNamn)
         {
             podcastRepository.Update(titel, nyttNamn);
+        }
+
+        public void UppdateraKategori(Guid poddId, Guid nyKategoriId)
+        {
+            podcastRepository.UppdateraKategori(poddId, nyKategoriId);
         }
 
         // Ta bort en podd baserat på titel

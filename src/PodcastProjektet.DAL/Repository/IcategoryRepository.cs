@@ -10,13 +10,13 @@ namespace PodcastProjektet.DAL.Repository
 {
     public interface IcategoryRepository <P> where P: class
     {
-        public void TaBort(string kategori);
+        public void TaBort(Guid id);
 
-        public void UppdateraKategori(string kategoriNamn, string nyKategoriNamn);
+        public void UppdateraKategori(Guid id, string nyKategoriNamn);
         public List<Kategori> HamtaAllaKategorier();
-        public void SkappaDefaultKategori();
+        public void SkapaDefaultKategori();
         public void LaggTillKategori(string nyKategori);
-        public void UppdateraPoddensKategori(string kategoriNamn, string nyKategoriNamn, string podTitel);
+        //public void UppdateraPoddensKategori(string kategoriNamn, string nyKategoriNamn, string podTitel);
   
 
 
