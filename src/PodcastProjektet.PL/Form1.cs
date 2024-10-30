@@ -88,7 +88,7 @@ namespace PodcastProjektet.PL
 
 
 
-        private void button4_Click(object sender, EventArgs e)
+        private async void button4_Click(object sender, EventArgs e)
         {
             string rssUrl = textBox2.Text; // Anta att du har en TextBox för RSS-URL
 
@@ -106,7 +106,7 @@ namespace PodcastProjektet.PL
                 return;
             }
 
-
+            await Task.Delay(1000);
             _controller.AddNewPoddFromRSS(rssUrl);
             var newPodd = _controller.GetAllPodcasts().Last();
             UpdateListView();// Hämta den senast tillagda podden
