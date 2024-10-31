@@ -377,36 +377,6 @@ namespace PodcastProjektet.PL
             {
                 MessageBox.Show("Vänligen välj en podd för att uppdatera dess kategori.");
             }
-            //if (KategoriListView.SelectedItems.Count > 0)
-            //{
-            //    var selectedItem = KategoriListView.SelectedItems[0];
-            //    var kategoriId = _kategorier[KategoriListView.SelectedIndices[0]].Id;
-            //    string nyKategoriNamn = KategoriTextBox.Text;
-            //    if (!string.IsNullOrWhiteSpace(nyKategoriNamn))
-            //    {
-            //        try
-            //        {
-            //            _kategoriController.UppdateraKategori(kategoriId, nyKategoriNamn);
-            //            MessageBox.Show("Kategorin har uppdaterats framgångsrikt!");
-            //            UpdateKategoriList();
-            //        }
-            //        catch (ArgumentException ex)
-            //        {
-            //            MessageBox.Show(ex.Message);
-            //        }
-            //    }
-            //    else
-            //    {
-            //        MessageBox.Show("Både gammal och ny kategori måste anges.");
-            //    }
-            //}
-            //else
-            //{
-            //    MessageBox.Show("Vänligen välj en podd för att uppdatera dess kategori.");
-            //}
-            //UpdateKategoriList();
-            //UpdateKategoriComboBox();
-            //UpdateListView();
 
         }
 
