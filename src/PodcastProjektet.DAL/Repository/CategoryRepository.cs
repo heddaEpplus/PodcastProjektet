@@ -18,7 +18,12 @@ namespace PodcastProjektet.DAL.Repository
         {
             serializer = new Serializer<Kategori>("kategoriLista");
             _podcastRepository = new PodcastRepository();
-            poddLista = _podcastRepository.GetAll();
+            InitializeAsync();
+        }
+
+        private async Task InitializeAsync()
+        {
+            poddLista = await _podcastRepository.GetAll();
             SkapaDefaultKategori();
         }
         public List<Kategori> HamtaAllaKategorier()
@@ -26,6 +31,7 @@ namespace PodcastProjektet.DAL.Repository
             var kategoriLista = serializer.Deserialize();
             return kategoriLista;
         }
+
 
         public void LaggTillKategori(string nyKategori)
         {
