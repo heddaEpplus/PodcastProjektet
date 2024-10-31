@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            ListViewItem listViewItem3 = new ListViewItem("");
-            ListViewItem listViewItem4 = new ListViewItem("");
+            ListViewItem listViewItem1 = new ListViewItem("");
+            ListViewItem listViewItem2 = new ListViewItem("");
             label1 = new Label();
             label2 = new Label();
             textBox1 = new TextBox();
@@ -137,13 +137,13 @@
             // 
             // laggTill
             // 
-            laggTill.BackColor = Color.PaleVioletRed;
+            laggTill.BackColor = Color.Silver;
             laggTill.Font = new Font("Verdana", 9F);
             laggTill.ForeColor = SystemColors.ButtonHighlight;
-            laggTill.Location = new Point(790, 172);
+            laggTill.Location = new Point(1428, 326);
             laggTill.Margin = new Padding(2);
             laggTill.Name = "laggTill";
-            laggTill.Size = new Size(110, 34);
+            laggTill.Size = new Size(146, 51);
             laggTill.TabIndex = 13;
             laggTill.Text = "Lägg till";
             laggTill.UseVisualStyleBackColor = false;
@@ -289,7 +289,7 @@
             listView2.Columns.AddRange(new ColumnHeader[] { Avsnitt1 });
             listView2.FullRowSelect = true;
             listView2.GridLines = true;
-            listView2.Items.AddRange(new ListViewItem[] { listViewItem3 });
+            listView2.Items.AddRange(new ListViewItem[] { listViewItem1 });
             listView2.Location = new Point(1732, 472);
             listView2.MultiSelect = false;
             listView2.Name = "listView2";
@@ -309,7 +309,7 @@
             KategoriListView.Columns.AddRange(new ColumnHeader[] { columnHeader2 });
             KategoriListView.FullRowSelect = true;
             KategoriListView.GridLines = true;
-            KategoriListView.Items.AddRange(new ListViewItem[] { listViewItem4 });
+            KategoriListView.Items.AddRange(new ListViewItem[] { listViewItem2 });
             KategoriListView.Location = new Point(2304, 472);
             KategoriListView.Name = "KategoriListView";
             KategoriListView.Size = new Size(579, 240);

@@ -348,8 +348,15 @@ namespace PodcastProjektet.PL
                 var selectedItem = KategoriListView.SelectedItems[0];
                 var kategoriId = _kategorier[KategoriListView.SelectedIndices[0]].Id;
                 string nyKategoriNamn = KategoriTextBox.Text;
+
                 if (!string.IsNullOrWhiteSpace(nyKategoriNamn))
                 {
+                    if (_valideringsController.KollaOmKategoriFinns(nyKategoriNamn) == true)
+                    {
+                        MessageBox.Show($"Kategorin '{nyKategoriNamn}' finns redan. Välj ett annat namn.");
+                        return;
+                    }
+
                     try
                     {
                         _kategoriController.UppdateraKategori(kategoriId, nyKategoriNamn);
@@ -370,9 +377,36 @@ namespace PodcastProjektet.PL
             {
                 MessageBox.Show("Vänligen välj en podd för att uppdatera dess kategori.");
             }
-            UpdateKategoriList();
-            UpdateKategoriComboBox();
-            UpdateListView();
+            //if (KategoriListView.SelectedItems.Count > 0)
+            //{
+            //    var selectedItem = KategoriListView.SelectedItems[0];
+            //    var kategoriId = _kategorier[KategoriListView.SelectedIndices[0]].Id;
+            //    string nyKategoriNamn = KategoriTextBox.Text;
+            //    if (!string.IsNullOrWhiteSpace(nyKategoriNamn))
+            //    {
+            //        try
+            //        {
+            //            _kategoriController.UppdateraKategori(kategoriId, nyKategoriNamn);
+            //            MessageBox.Show("Kategorin har uppdaterats framgångsrikt!");
+            //            UpdateKategoriList();
+            //        }
+            //        catch (ArgumentException ex)
+            //        {
+            //            MessageBox.Show(ex.Message);
+            //        }
+            //    }
+            //    else
+            //    {
+            //        MessageBox.Show("Både gammal och ny kategori måste anges.");
+            //    }
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Vänligen välj en podd för att uppdatera dess kategori.");
+            //}
+            //UpdateKategoriList();
+            //UpdateKategoriComboBox();
+            //UpdateListView();
 
         }
 
@@ -411,14 +445,18 @@ namespace PodcastProjektet.PL
 
         private void KategoriListView_SelectedIndexChanged(object sender, EventArgs e)
         {
-            List<Kategori> kategorier = _kategoriController.HamtaAllaKategorier();
+            //List<Kategori> kategorier = _kategoriController.HamtaAllaKategorier();
 
-            foreach (var kategori in kategorier)
+            //foreach (var kategori in kategorier)
+            //{
+            //    ListViewItem item = new ListViewItem(kategori.Namn);
+            //    KategoriListView.Items.Add(item);
+
+
+            //}
+            if (KategoriListView.SelectedItems.Count > 0)
             {
-                ListViewItem item = new ListViewItem(kategori.Namn);
-                KategoriListView.Items.Add(item);
-
-
+                var valdKategori = KategoriListView.SelectedItems[0].Text;
             }
         }
 

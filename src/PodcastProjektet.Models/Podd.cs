@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 
 namespace PodcastProjektet.Models
 {
-    public class Podd
+    public class Podd : Media
     {
         public string Titel { get; set; }
         public Guid Id { get; set; }
@@ -24,7 +24,7 @@ namespace PodcastProjektet.Models
             AvsnittLista = new List<Avsnitt>(); // Initiera listan
         }
 
-        public string hamtaPodd()
+        public override string hamtaPodd()
         {
             return Titel;
         }
