@@ -24,7 +24,7 @@ namespace PodcastProjektet.DAL.Repository
             
         }
 
-        public List<Podd> GetAll()
+        public async Task <List<Podd>> GetAll()
         {
            List<Podd> poddlistDeserialized = new List<Podd>();
                 try {

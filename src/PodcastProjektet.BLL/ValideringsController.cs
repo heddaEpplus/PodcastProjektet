@@ -49,10 +49,11 @@ namespace PodcastProjektet.BLL
             return finns;
         }
 
-        public bool KollaOmNamnFinns(string poddNamn)
+        public async Task <bool> KollaOmNamnFinns(string poddNamn)
         {
             bool finns = false;
-            foreach (var enPodd in poddRepo.GetAll())
+            var poddar = await poddRepo.GetAll();
+            foreach (var enPodd in poddar)
             {
                 if (enPodd.Namn.Equals(poddNamn))
                 {
@@ -62,9 +63,10 @@ namespace PodcastProjektet.BLL
             return finns;
         }
 
-        public bool KollaOmPoddFinns(string rssUrl)
+        public async Task <bool> KollaOmPoddFinns(string rssUrl)
         {
-            var selectUrl = from enPodd in poddRepo.GetAll()
+            var poddar = await poddRepo.GetAll();
+            var selectUrl = from enPodd in poddar
                             where enPodd.Url.Equals(rssUrl)
                             select enPodd.Url;
             return selectUrl.Any();

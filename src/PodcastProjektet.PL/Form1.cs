@@ -94,7 +94,7 @@ namespace PodcastProjektet.PL
 
 
 
-            if (_valideringsController.KollaOmPoddFinns(rssUrl))
+            if (await _valideringsController.KollaOmPoddFinns(rssUrl))
             {
                 MessageBox.Show("Denna podd finns redan!", "", MessageBoxButtons.OK);
                 return;
@@ -106,9 +106,10 @@ namespace PodcastProjektet.PL
                 return;
             }
 
-            await Task.Delay(1000);
-            _controller.AddNewPoddFromRSS(rssUrl);
-            var newPodd = _controller.GetAllPodcasts().Last();
+            await _controller.AddNewPoddFromRSS(rssUrl);
+
+            var podcasts = await _controller.GetAllPodcasts();
+            var newPodd = podcasts.Last();
             UpdateListView();// Hämta den senast tillagda podden
             UpdateAvsnittListView(newPodd); // Uppdatera avsnitt i listView2
 
@@ -129,7 +130,7 @@ namespace PodcastProjektet.PL
 
         }
 
-        public void UpdateListView()
+        public async Task UpdateListView()
         {
             // Rensa nuvarande innehåll i ListView
             listView1.Items.Clear();
@@ -137,7 +138,7 @@ namespace PodcastProjektet.PL
             listView2.Items.Clear();
 
             // Hämta alla poddar och fyll i ListView
-            _poddar = _controller.GetAllPodcasts();
+            _poddar = await _controller.GetAllPodcasts();
 
 
 
@@ -164,7 +165,7 @@ namespace PodcastProjektet.PL
             if (_poddar.Count > 0)
             {
                 var firstPodd = _poddar[0]; // Hämta den första podden
-                UpdateAvsnittListView(firstPodd); // Uppdatera avsnitt i listView2
+                await UpdateAvsnittListView(firstPodd); // Uppdatera avsnitt i listView2
             }
 
             else
@@ -179,7 +180,7 @@ namespace PodcastProjektet.PL
 
 
 
-        private void UpdateAvsnittListView(Podd selectedPodd)
+        private async Task UpdateAvsnittListView(Podd selectedPodd)
         {
             listView2.Items.Clear(); // Rensa tidigare avsnitt
 
@@ -209,7 +210,7 @@ namespace PodcastProjektet.PL
 
         }
 
-        private void button6_Click(object sender, EventArgs e)
+        private async void button6_Click(object sender, EventArgs e)
         {
             if (listView1.SelectedItems.Count > 0)
             {
@@ -221,7 +222,7 @@ namespace PodcastProjektet.PL
                 if (!string.IsNullOrWhiteSpace(nyttNamn))
                 {
                     // Kontrollera om namnet redan finns
-                    if (_valideringsController.KollaOmNamnFinns(nyttNamn))
+                    if (await _valideringsController.KollaOmNamnFinns(nyttNamn))
                     {
                         MessageBox.Show("Namnet du angett finns redan!", "", MessageBoxButtons.OK);
                         return; // Avbryt om namnet redan finns
@@ -235,7 +236,7 @@ namespace PodcastProjektet.PL
                     podd.Namn = nyttNamn; // Uppdatera Podd-objektet
 
                     // Spara ändringar i databasen
-                    _controller.UpdatePodd(poddTitle, nyttNamn);
+                    await _controller.UpdatePodd(poddTitle, nyttNamn);
                     UpdateListView();
 
                     // Visa ett meddelande till användaren om att uppdateringen sparades.
@@ -362,6 +363,8 @@ namespace PodcastProjektet.PL
                         _kategoriController.UppdateraKategori(kategoriId, nyKategoriNamn);
                         MessageBox.Show("Kategorin har uppdaterats framgångsrikt!");
                         UpdateKategoriList();
+                        UpdateKategoriComboBox();
+                        UpdateListView();
                     }
                     catch (ArgumentException ex)
                     {

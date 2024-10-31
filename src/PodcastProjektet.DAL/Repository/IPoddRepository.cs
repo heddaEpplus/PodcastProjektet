@@ -8,7 +8,7 @@ namespace PodcastProjektet.DAL.Repository
 {
     public interface IPoddRepository<P> where P : class
     {
-        List<P> GetAll();
+        Task <List<P>> GetAll();
         P GetByID(string id);
         void Insert(P theObject);
         void Update(string titel, string nyttNamn);

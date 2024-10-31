@@ -22,9 +22,9 @@ namespace PodcastProjektet.BLL
 
         }
 
-        public List<Podd> GetAllPodcasts()
+        public async Task <List<Podd>> GetAllPodcasts()
         {
-            var podcasts = podcastRepository.GetAll();
+            var podcasts = await podcastRepository.GetAll();
             var categories = kategoriController.HamtaKategoriViaId();
             foreach(var podcast in podcasts)
             {
@@ -47,7 +47,7 @@ namespace PodcastProjektet.BLL
         }
 
         // Uppdatera en befintlig podd
-        public void UpdatePodd(string titel, string nyttNamn)
+        public async Task UpdatePodd(string titel, string nyttNamn)
         {
             podcastRepository.Update(titel, nyttNamn);
         }
@@ -64,10 +64,11 @@ namespace PodcastProjektet.BLL
         }
 
         // Lägg till ett nytt RSS-flöde
-        public bool AddNewPoddFromRSS(string rssUrl)
+        public async Task AddNewPoddFromRSS(string rssUrl)
            
         {
-            return ((PodcastRepository)podcastRepository).AddNewPoddFeed(rssUrl);
+            ((PodcastRepository)podcastRepository).AddNewPoddFeed(rssUrl);
+            await Task.Delay(1000);
            
         }
 
