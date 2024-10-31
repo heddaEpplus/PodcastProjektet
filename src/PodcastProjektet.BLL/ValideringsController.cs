@@ -41,7 +41,7 @@ namespace PodcastProjektet.BLL
             bool finns = false;
             foreach (var enKategori in kategoriRepo.HamtaAllaKategorier())
             {
-                if (enKategori.Equals(kategoriNamn))
+                if (enKategori.Namn.Equals(kategoriNamn))
                 {
                     finns = true;
                 }

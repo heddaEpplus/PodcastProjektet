@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace PodcastProjektet.Models
 {
-    internal class Media
+    public class Media
     {
+        public virtual string hamtaPodd()
+        {
+            return "";
+        }
     }
 }
