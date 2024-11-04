@@ -14,7 +14,7 @@ namespace PodcastProjektet.Models
 
         public Avsnitt() 
             {
-                //hej
+                
             }
         }
 

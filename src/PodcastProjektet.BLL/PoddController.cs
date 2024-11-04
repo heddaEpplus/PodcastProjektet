@@ -34,19 +34,19 @@ namespace PodcastProjektet.BLL
             return podcasts;
         }
 
-        // Hämta en podd baserat på ID
+        
         public Podd GetPoddById(string id)
         {
             return podcastRepository.GetByID(id);
         }
 
-        // Lägg till en ny podd
+        
         public void AddPodd(Podd newPodd)
         {
             podcastRepository.Insert(newPodd);
         }
 
-        // Uppdatera en befintlig podd
+       
         public async Task UpdatePodd(string titel, string nyttNamn)
         {
             podcastRepository.Update(titel, nyttNamn);
@@ -57,13 +57,13 @@ namespace PodcastProjektet.BLL
             podcastRepository.UppdateraKategori(poddId, nyKategoriId);
         }
 
-        // Ta bort en podd baserat på titel
+        
         public void DeletePodd(string titel)
         {
             podcastRepository.Delete(titel);
         }
 
-        // Lägg till ett nytt RSS-flöde
+       
         public async Task AddNewPoddFromRSS(string rssUrl)
            
         {

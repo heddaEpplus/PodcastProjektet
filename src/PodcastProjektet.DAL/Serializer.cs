@@ -31,7 +31,7 @@ namespace PodcastProjektet.DAL
             {
             if (!File.Exists(FileName))
             {
-                // Returnera en tom lista om filen saknas
+               
                 return new List<P>();
             }
 
@@ -44,12 +44,7 @@ namespace PodcastProjektet.DAL
             }
 
             return list;
-            //List<P> list;
-            //XmlSerializer enXmlSerializer = new XmlSerializer(typeof(List<P>));
-            //FileStream minFileStream= new FileStream(FileName,FileMode.Open, FileAccess.Read);
-            //list = (List<P>)enXmlSerializer.Deserialize(minFileStream);
-            //minFileStream.Close ();
-            //return list;
+            
         }
         
         }

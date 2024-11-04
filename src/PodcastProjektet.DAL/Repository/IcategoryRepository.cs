@@ -16,7 +16,7 @@ namespace PodcastProjektet.DAL.Repository
         public List<Kategori> HamtaAllaKategorier();
         public void SkapaDefaultKategori();
         public void LaggTillKategori(string nyKategori);
-        //public void UppdateraPoddensKategori(string kategoriNamn, string nyKategoriNamn, string podTitel);
+        
   
 
 

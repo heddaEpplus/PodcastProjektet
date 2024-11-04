@@ -57,9 +57,5 @@ namespace PodcastProjektet.BLL
             _categoryRepository.UppdateraKategori(kategoriId, nyKategoriNamn);
         }
 
-        //public void UppdateraPoddensKategori(string kategoriNamn, string nyKategoriNamn, string podTitel)
-        //{
-        //    _categoryRepository.UppdateraPoddensKategori(kategoriNamn, nyKategoriNamn, podTitel);
-        //}
     }
 }
