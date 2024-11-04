@@ -333,7 +333,14 @@ namespace PodcastProjektet.PL
 
         private void AndraKategori_Click(object sender, EventArgs e)
         {
-            if (KategoriListView.SelectedItems.Count > 0)
+            bool markeradKategori = KategoriListView.SelectedItems.Count > 0;
+
+            if(_valideringsController.KollaOmKategoriArMarkerad(markeradKategori) == false)
+            {
+                MessageBox.Show("Vänligen markera en kategori att ändra.");
+            }
+
+            if (_valideringsController.KollaOmKategoriArMarkerad(markeradKategori) == true)
             {
                 var selectedItem = KategoriListView.SelectedItems[0];
                 var kategoriId = _kategorier[KategoriListView.SelectedIndices[0]].Id;
@@ -364,10 +371,6 @@ namespace PodcastProjektet.PL
                 {
                     MessageBox.Show("Både gammal och ny kategori måste anges.");
                 }
-            }
-            else
-            {
-                MessageBox.Show("Vänligen välj en podd för att uppdatera dess kategori.");
             }
 
         }
