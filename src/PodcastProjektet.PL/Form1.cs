@@ -113,14 +113,7 @@ namespace PodcastProjektet.PL
             UpdateListView();
             UpdateAvsnittListView(newPodd);
 
-
-
-
-
-
-
-
-
+            textBox2.Clear();
 
 
         }
@@ -240,6 +233,7 @@ namespace PodcastProjektet.PL
 
                     MessageBox.Show("Poddens namn har uppdaterats och sparats.");
                 }
+                textBox1.Clear();
             }
 
 

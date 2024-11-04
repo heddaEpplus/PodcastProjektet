@@ -29,12 +29,11 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            ListViewItem listViewItem5 = new ListViewItem("");
-            ListViewItem listViewItem6 = new ListViewItem("");
+            ListViewItem listViewItem1 = new ListViewItem("");
+            ListViewItem listViewItem2 = new ListViewItem("");
             label1 = new Label();
             label2 = new Label();
             textBox1 = new TextBox();
-            comboBox2 = new ComboBox();
             label3 = new Label();
             textBox2 = new TextBox();
             SorteraKategoriComboBox = new ComboBox();
@@ -97,21 +96,11 @@
             textBox1.Font = new Font("Verdana", 9F, FontStyle.Italic);
             textBox1.Location = new Point(61, 100);
             textBox1.Margin = new Padding(1);
+            textBox1.Multiline = true;
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(303, 19);
+            textBox1.Size = new Size(303, 27);
             textBox1.TabIndex = 5;
             textBox1.TextChanged += textBox1_TextChanged;
-            // 
-            // comboBox2
-            // 
-            comboBox2.BackColor = Color.LavenderBlush;
-            comboBox2.Font = new Font("Verdana", 9F, FontStyle.Italic);
-            comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new Point(61, 131);
-            comboBox2.Margin = new Padding(1);
-            comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(179, 26);
-            comboBox2.TabIndex = 7;
             // 
             // label3
             // 
@@ -181,10 +170,10 @@
             button6.BackColor = Color.PaleVioletRed;
             button6.Font = new Font("Verdana", 9F, FontStyle.Italic);
             button6.ForeColor = SystemColors.ButtonHighlight;
-            button6.Location = new Point(61, 164);
+            button6.Location = new Point(61, 154);
             button6.Margin = new Padding(1);
             button6.Name = "button6";
-            button6.Size = new Size(89, 28);
+            button6.Size = new Size(123, 28);
             button6.TabIndex = 15;
             button6.Text = "Ändra";
             button6.UseVisualStyleBackColor = false;
@@ -195,10 +184,10 @@
             button7.BackColor = Color.PaleVioletRed;
             button7.Font = new Font("Verdana", 9F, FontStyle.Italic);
             button7.ForeColor = SystemColors.ButtonHighlight;
-            button7.Location = new Point(169, 164);
+            button7.Location = new Point(253, 153);
             button7.Margin = new Padding(1);
             button7.Name = "button7";
-            button7.Size = new Size(89, 28);
+            button7.Size = new Size(111, 28);
             button7.TabIndex = 16;
             button7.Text = "Ta bort";
             button7.UseVisualStyleBackColor = false;
@@ -353,7 +342,7 @@
             listView2.Columns.AddRange(new ColumnHeader[] { Avsnitt1 });
             listView2.FullRowSelect = true;
             listView2.GridLines = true;
-            listView2.Items.AddRange(new ListViewItem[] { listViewItem5 });
+            listView2.Items.AddRange(new ListViewItem[] { listViewItem1 });
             listView2.Location = new Point(815, 215);
             listView2.Margin = new Padding(1);
             listView2.MultiSelect = false;
@@ -376,7 +365,7 @@
             KategoriListView.Columns.AddRange(new ColumnHeader[] { columnHeader2 });
             KategoriListView.FullRowSelect = true;
             KategoriListView.GridLines = true;
-            KategoriListView.Items.AddRange(new ListViewItem[] { listViewItem6 });
+            KategoriListView.Items.AddRange(new ListViewItem[] { listViewItem2 });
             KategoriListView.Location = new Point(1084, 215);
             KategoriListView.Margin = new Padding(1);
             KategoriListView.Name = "KategoriListView";
@@ -442,7 +431,6 @@
             Controls.Add(SorteraKategoriComboBox);
             Controls.Add(textBox2);
             Controls.Add(label3);
-            Controls.Add(comboBox2);
             Controls.Add(textBox1);
             Controls.Add(label2);
             Controls.Add(label1);
@@ -459,7 +447,6 @@
         private Label label1;
         private Label label2;
         private TextBox textBox1;
-        private ComboBox comboBox2;
         private Label label3;
         private TextBox textBox2;
         private ComboBox SorteraKategoriComboBox;
