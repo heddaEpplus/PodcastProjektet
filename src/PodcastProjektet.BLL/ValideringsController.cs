@@ -48,6 +48,10 @@ namespace PodcastProjektet.BLL
             }
             return finns;
         }
+        public bool KollaOmKategoriArMarkerad(bool markeradKategori)
+        {
+            return markeradKategori;
+        }
 
         public async Task <bool> KollaOmNamnFinns(string poddNamn)
         {
