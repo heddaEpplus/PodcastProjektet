@@ -445,9 +445,26 @@ namespace PodcastProjektet.PL
 
         private void contextMenuStrip1_MouseClick(object sender, MouseEventArgs e)
         {
-            var podd = _poddar[listView1.SelectedIndices[0]];
-            var form = new SelectPodCategoryForm(podd, this);
-            form.ShowDialog();
+            if (listView1.SelectedItems.Count > 0)
+            {
+                var selectedItem = listView1.SelectedItems[0];
+                var podd = selectedItem.Tag as Podd;
+
+                if (podd == null)
+                {
+                    MessageBox.Show("Vänligen välj en podd från listan", "Ingen podd vald", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    var form = new SelectPodCategoryForm(podd, this);
+                    form.ShowDialog();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Vänligen välj en podd från listan", "Ingen podd vald", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
         }
 
         private void btnKategori_Click(object sender, EventArgs e)
